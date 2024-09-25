@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  category: one
+  commitment: one
+  hours_allocated: 1
+  completed: false
+  archived: false
+
+two:
+  title: MyString
+  description: MyText
+  category: two
+  commitment: two
+  hours_allocated: 1
+  completed: false
+  archived: false

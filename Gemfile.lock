@@ -75,6 +75,7 @@ GEM
       public_suffix (>= 2.0.2, < 7.0)
     ast (2.4.2)
     base64 (0.2.0)
+    bcrypt (3.1.20)
     bigdecimal (3.1.8)
     bindex (0.8.1)
     bootsnap (1.18.4)
@@ -82,6 +83,9 @@ GEM
     brakeman (6.2.1)
       racc
     builder (3.3.0)
+    bullet (7.2.0)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     capybara (3.40.0)
       addressable
       matrix
@@ -98,6 +102,12 @@ GEM
     debug (1.9.2)
       irb (~> 1.10)
       reline (>= 0.3.8)
+    devise (4.9.4)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 4.1.0)
+      responders
+      warden (~> 1.2.3)
     drb (2.2.1)
     erubi (1.13.0)
     globalid (1.2.1)
@@ -116,11 +126,25 @@ GEM
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     json (2.7.2)
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
     language_server-protocol (3.17.0.3)
     logger (1.6.1)
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
+    lucide-rails (0.5.1)
+      railties (>= 4.1.0)
     mail (2.8.1)
       mini_mime (>= 0.1.1)
       net-imap
@@ -153,6 +177,10 @@ GEM
       racc (~> 1.4)
     nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
+    orm_adapter (0.5.0)
+    paper_trail (15.2.0)
+      activerecord (>= 6.1)
+      request_store (~> 1.4)
     parallel (1.26.3)
     parser (3.3.5.0)
       ast (~> 2.4.1)
@@ -203,11 +231,20 @@ GEM
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
     rake (13.2.1)
+    ransack (4.2.1)
+      activerecord (>= 6.1.5)
+      activesupport (>= 6.1.5)
+      i18n
     rdoc (6.7.0)
       psych (>= 4.0.0)
     regexp_parser (2.9.2)
     reline (0.5.10)
       io-console (~> 0.5)
+    request_store (1.7.0)
+      rack (>= 1.4)
+    responders (3.1.1)
+      actionpack (>= 5.2)
+      railties (>= 5.2)
     rexml (3.3.7)
     rubocop (1.66.1)
       json (~> 2.3)
@@ -276,7 +313,10 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.6.0)
+    uniform_notifier (1.16.0)
     useragent (0.16.10)
+    warden (1.2.9)
+      rack (>= 2.0.9)
     web-console (4.2.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -302,13 +342,19 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   brakeman
+  bullet
   capybara
   debug
+  devise
   importmap-rails
   jbuilder
+  kaminari
+  lucide-rails
+  paper_trail
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.2.1)
+  ransack
   rubocop-rails-omakase
   selenium-webdriver
   sprockets-rails
