@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  task: one
+  commitment: one
+  start_date: 2024-09-25 01:44:01
+  end_date: 2024-09-25 01:44:01
+
+two:
+  task: two
+  commitment: two
+  start_date: 2024-09-25 01:44:01
+  end_date: 2024-09-25 01:44:01
