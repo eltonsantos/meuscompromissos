@@ -6,6 +6,6 @@ class Task < ApplicationRecord
 
   validates :title, presence: true
   validates :hours, numericality: { greater_than: 0 }
-  validates :completed, inclusion: { in: [ true, false ] }
+  validates :status, inclusion: { in: [ true, false ] }
   validates :archived, inclusion: { in: [ true, false ] }
 end

@@ -6,7 +6,7 @@ class CreateTasks < ActiveRecord::Migration[7.2]
       t.references :category, null: false, foreign_key: true
       t.references :commitment, null: false, foreign_key: true
       t.decimal :hours, precision: 5, scale: 2, null: false
-      t.boolean :completed, default: false
+      t.boolean :status, default: false
       t.boolean :archived, default: false
 
       t.timestamps

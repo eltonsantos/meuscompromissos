@@ -24,7 +24,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_25_044401) do
   create_table "commitments", force: :cascade do |t|
     t.text "description"
     t.bigint "user_id", null: false
-    t.integer "progress"
+    t.decimal "progress", precision: 5, scale: 2, default: "0.0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_commitments_on_user_id"
@@ -40,13 +40,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_25_044401) do
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.string "title"
+    t.string "title", null: false
     t.text "description"
     t.bigint "category_id", null: false
     t.bigint "commitment_id", null: false
-    t.integer "hours_allocated"
-    t.boolean "completed"
-    t.boolean "archived"
+    t.decimal "hours", precision: 5, scale: 2, null: false
+    t.boolean "status", default: false
+    t.boolean "archived", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_tasks_on_category_id"
@@ -57,7 +57,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_25_044401) do
     t.string "name"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.integer "hours_per_week", default: 0, null: false
+    t.decimal "hours_per_week", precision: 5, scale: 2, null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
