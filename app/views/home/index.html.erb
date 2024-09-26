@@ -5,10 +5,12 @@
       <% @tasks.each do |task| %>
         <div class="card relative grid grid-cols-6 gap-4 mb-2 p-8 transition-all bg-white duration-200 hover:bg-gradient-to-r from-orange-100 to-white rounded items-center" data-id="<%= task.id %>">
           <div class="col-span-2 text-start">
-            <div class="flex gap-4 items-center">
-              <span><%= task.id %></span>
-              <div class="text-xl font-semibold"><%= task.title %></div>
-            </div>
+            <%= link_to task_path(task.id), data: { turbo_frame: "modal" } do %>  
+              <div class="flex gap-4 items-center">
+                <span><%= task.id %></span>
+                <div class="text-xl font-semibold"><%= task.title %></div>
+              </div>
+            <% end %>
           </div>
           <div class="col-span-1">
             <span class="block text-xs font-semibold uppercase">Horas Alocadas</span>
