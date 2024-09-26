@@ -1,4 +1,4 @@
-<div class="container flex animate-up delay-2">
+<div class="container flex animate-up delay-2 bg-white p-8">
   <aside class="card bg-white border border-gray-300 rounded-lg p-8 text-center mr-8 justify-center flex flex-col items-center">
     <% if resource.avatar? %>
       <img src="<%= resource.avatar %>" alt="Avatar" class="rounded-full border-yellow-500 border-4 border-secondary w-28 h-28 mb-4" />
@@ -62,11 +62,14 @@
       </div>
     <% end %>
 
-    <h3 class="text-lg font-semibold mt-6">Cancelar minha conta</h3>
+    <h3 class="text-lg font-semibold mt-6 border-t-4 border-red-400">Zona de perigo</h3>
     <div>
-      Unhappy? <%= button_to "Cancelar minha conta", registration_path(resource_name), data: { confirm: "Você tem certeza?" }, method: :delete, class: 'text-red-600' %>
+      <%= button_to registration_path(resource_name), data: { confirm: "Você tem certeza? Essa ação não poderá ser desfeita e todos os dados serão perdidos!" }, method: :delete, class: 'button orange mt-3 inline-flex items-center bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 font-bold' do %>
+        <span class="mr-2">
+          <%= lucide_icon('x', class: 'text-white') %>
+        </span>
+        Cancelar minha conta
+      <% end %>
     </div>
-
-    <%= link_to "Voltar", :back, class: 'mt-4 text-blue-500' %>
   </main>
 </div>

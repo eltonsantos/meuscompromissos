@@ -1,23 +1,24 @@
 <%= render "modal", title: "Detalhes" do %>
   <div class="w-full bg-white p-2">
     <div class="space-y-4">
-      <p class="my-5">
-        <strong class="block font-medium mb-1">Title:</strong>
-        <%= @task.title %>
+      <p class="border-b border-gray-200 pb-2">
+        <strong class="block font-medium mb-1 text-slate-900">
+          <%= @task.title %>
+        </strong>
       </p>
 
       <p class="my-5">
-        <strong class="block font-medium mb-1">Description:</strong>
+        <strong class="block font-medium mb-1">Descrição:</strong>
         <%= @task.description %>
       </p>
 
       <p class="my-5">
-        <strong class="block font-medium mb-1">Category:</strong>
+        <strong class="block font-medium mb-1">Categoria:</strong>
         <%= @task.category.name %>
       </p>
 
       <p class="my-5">
-        <strong class="block font-medium mb-1">Hours allocated:</strong>
+        <strong class="block font-medium mb-1">Horas alocadas</strong>
         <%= @task.hours %>
       </p>
     </div>
