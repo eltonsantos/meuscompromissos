@@ -13,6 +13,7 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @task = Task.new
+    @categories = current_user.commitments.includes(:tasks).flat_map(&:tasks).map(&:category).uniq
   end
 
   # GET /tasks/1/edit
@@ -22,10 +23,13 @@ class TasksController < ApplicationController
   # POST /tasks or /tasks.json
   def create
     @task = Task.new(task_params)
+    
+    @task.commitment = current_user.commitments.find_by(active: true)
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: "Task was successfully created." }
+        TaskHistory.create(task: @task, commitment: @task.commitment)
+        format.html { redirect_to root_path, notice: "Task was successfully created." }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +42,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to @task, notice: "Task was successfully updated." }
+        format.html { redirect_to root_path, notice: "Task was successfully updated." }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -65,6 +69,6 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:title, :description, :category_id, :commitment_id, :hours_allocated, :completed, :archived)
+      params.require(:task).permit(:title, :description, :category_id, :hours)
     end
 end

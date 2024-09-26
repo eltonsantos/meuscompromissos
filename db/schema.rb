@@ -16,7 +16,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_25_044401) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
-    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -25,6 +24,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_25_044401) do
     t.text "description"
     t.bigint "user_id", null: false
     t.decimal "progress", precision: 5, scale: 2, default: "0.0"
+    t.boolean "active", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_commitments_on_user_id"

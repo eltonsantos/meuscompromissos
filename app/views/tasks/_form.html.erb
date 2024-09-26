@@ -22,28 +22,14 @@
   </div>
 
   <div class="my-5">
-    <%= form.label :category_id %>
-    <%= form.text_field :category_id, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.label :category_id, "Categoria" %>
+    <%= category_select(form) %>
+    <%= link_to "Cadastrar nova categoria", new_category_path, class: "text-blue-600 hover:underline ml-2" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :commitment_id %>
-    <%= form.text_field :commitment_id, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :hours_allocated %>
-    <%= form.number_field :hours_allocated, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :completed %>
-    <%= form.check_box :completed, class: "block mt-2 h-5 w-5" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :archived %>
-    <%= form.check_box :archived, class: "block mt-2 h-5 w-5" %>
+    <%= form.label :hours %>
+    <%= form.number_field :hours, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="inline">

@@ -1,0 +1,35 @@
+<div class="container">
+  <main class="animate-up delay-2">
+    <h1 class="sr-only">Trabalhos</h1>
+    <div class="cards">
+      <% @tasks.each do |task| %>
+        <div class="card relative grid grid-cols-6 gap-4 mb-2 p-8 transition-all bg-white duration-200 hover:bg-gradient-to-r from-orange-100 to-white rounded items-center" data-id="<%= task.id %>">
+          <div class="col-span-2 text-start">
+            <div class="flex gap-4 items-center">
+              <span><%= task.id %></span>
+              <div class="text-xl font-semibold"><%= task.title %></div>
+            </div>
+          </div>
+          <div class="col-span-1">
+            <span class="block text-xs font-semibold uppercase">Horas Alocadas</span>
+            <p class="font-semibold"><%= task.hours %> hora(s)</p>
+          </div>
+          <div class="col-span-1">
+            <span class="block text-xs font-semibold uppercase">Categoria</span>
+            <p class="font-semibold"><%= task.category.name %></p>
+          </div>
+          <div class="col-span-1 flex items-center justify-center text-blue-600 font-semibold">
+            <%= task.status == true ? 'Concluída' : 'Em andamento' %>
+          </div>
+          <div class="col-span-1 flex justify-end items-center gap-3">
+            <p class="sr-only">Ações</p>
+            <%= link_to lucide_icon('check-check', class: 'text-green-500'), edit_task_path(task.id), title: 'Marcar como concluída' %>
+            <%= link_to lucide_icon('archive', class: 'text-gray-500'), edit_task_path(task.id), title: 'Arquivar Tarefa' %>
+            <%= link_to lucide_icon('edit', class: 'text-blue-500'), edit_task_path(task.id), title: 'Editar Tarefa' %>
+            <%= link_to lucide_icon('trash', class: 'text-red-500'), task_path(task.id), method: :delete, data: { confirm: 'Você tem certeza que deseja excluir esta tarefa?' }, title: 'Remover Tarefa' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </main>
+</div>

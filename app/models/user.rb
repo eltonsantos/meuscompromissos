@@ -10,4 +10,8 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true
   validates :hours_per_week, numericality: { greater_than: 0 }
+
+  def has_active_commitments?
+    commitments.where(active: true).exists?
+  end
 end

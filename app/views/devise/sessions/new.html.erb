@@ -1,0 +1,49 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
+    <h1 class="text-3xl font-bold text-center mb-6 text-slate-800">Meus Compromissos</h1>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <% if resource.errors.any? %>
+        <div id="error_explanation" data-turbo-cache="false" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+          <h2 class="text-lg font-semibold">
+            <%= I18n.t("errors.messages.not_saved",
+                       count: resource.errors.count,
+                       resource: resource.class.model_name.human.downcase) %>
+          </h2>
+          <ul class="list-disc pl-5 mt-2">
+            <% resource.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      
+      <div class="space-y-4">
+        <div>
+          <%= f.label :email, "E-mail", class: "block text-sm font-medium text-gray-700" %>
+          <%= f.email_field :email, required: true, autofocus: true, input_html: { autocomplete: "email" }, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-stone-500 focus:border-stone-500 sm:text-sm" %>
+        </div>
+
+        <div>
+          <%= f.label :password, "Senha", class: "block text-sm font-medium text-gray-700" %>
+          <%= f.password_field :password, required: true, input_html: { autocomplete: "current-password" }, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-stone-500 focus:border-stone-500 sm:text-sm" %>
+        </div>
+
+        <% if devise_mapping.rememberable? %>
+          <div class="flex items-center">
+            <%= f.check_box :remember_me, as: :boolean, class: "h-4 w-4 text-stone-600 focus:ring-stone-500 border-gray-300 rounded" %>
+            <%= f.label :remember_me, "Lembrar-me", class: "ml-2 block text-sm text-gray-900" %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="mt-6">
+        <%= f.submit "Entrar", class: "w-full bg-stone-600 text-white py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium hover:bg-stone-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-stone-500" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+
