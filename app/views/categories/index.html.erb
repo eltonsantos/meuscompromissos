@@ -1,21 +1,42 @@
-<div class="w-full">
-  <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+<% if notice.present? %>
+  <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+<% end %>
+
+<% content_for :title, "Categorias" %>
+
+<div class="flex justify-between items-center mb-6">
+  <h1 class="font-bold text-4xl text-blue-500">Categorias</h1>
+  <%= link_to "Cadastrar categoria", new_category_path, class: "rounded-lg py-3 px-5 bg-blue-400 hover:bg-blue-500 text-white block font-medium" %>
+</div>
+
+<div id="categories" class="w-full">
+  <% if @categories.any? %>
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-blue-50">
+        <tr>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nome</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        <% @categories.each do |category| %>
+          <tr id="<%= dom_id category %>">
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900"><%= category.name %></div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
+              <%= link_to edit_category_path(category), class: "ml-2 rounded-lg py-2 px-4 text-blue-600 hover:bg-gray-100 inline-block font-medium cursor-pointer" do %>
+                <%= lucide_icon('file-pen-line', class: 'inline-block text-blue-600 cursor-pointer') %>
+              <% end %>
+              <%= link_to category, method: :delete, class: "ml-2 rounded-lg py-2 px-4 text-blue-600 hover:bg-gray-100 inline-block font-medium cursor-pointer", data: { turbo_method: :delete, turbo_confirm: "Tem certeza?" } do %>
+                <%= lucide_icon('circle-x', class: 'inline-block text-red-600 cursor-pointer') %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>Nenhum sintoma registrado</p>
   <% end %>
-
-  <% content_for :title, "Categories" %>
-
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Categories</h1>
-    <%= link_to "New category", new_category_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
-  </div>
-
-  <div id="categories" class="min-w-full">
-    <% @categories.each do |category| %>
-      <%= render category %>
-      <p>
-        <%= link_to "Show this category", category, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-      </p>
-    <% end %>
-  </div>
 </div>

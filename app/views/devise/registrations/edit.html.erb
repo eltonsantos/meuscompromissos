@@ -1,43 +1,72 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+<div class="container flex animate-up delay-2">
+  <aside class="card bg-white border border-gray-300 rounded-lg p-8 text-center mr-8 justify-center flex flex-col items-center">
+    <% if resource.avatar? %>
+      <img src="<%= resource.avatar %>" alt="Avatar" class="rounded-full border-yellow-500 border-4 border-secondary w-28 h-28 mb-4" />
+    <% else %>
+      <%= lucide_icon('user-round', class: "rounded-full border-yellow-500 border-4 border-secondary w-28 h-28 mb-4") %>
     <% end %>
-  </div>
+    <h2 class="text-2xl font-semibold mb-4"><%= resource.name %></h2>
+    <p class="text-lg">
+      Quantidade de horas que trabalha na semana: <br />
+      <strong><%= resource.hours_per_week %></strong>
+    </p>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+    <div class="flex flex-col items-center mt-4 space-y-4">
+      <%= link_to "Ver compromissos anteriores", root_path, class: "text-blue-400 font-semibold rounded transition duration-200 hover:text-blue-500" %>
+      <%= link_to "Histórico de modificações", root_path, class: "text-blue-400 font-semibold rounded transition duration-200 hover:text-blue-500" %>
+      <%= link_to "Categorias cadastradas", categories_path, class: "text-blue-400 font-semibold rounded transition duration-200 hover:text-blue-500" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
+  </aside>  
+  <main class="flex-1">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'space-y-4' }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
+      <div class="field">
+        <%= f.label :name, class: 'block font-semibold' %>
+        <%= f.text_field :name, class: 'mt-1 block w-full border border-gray-300 rounded-md p-2', placeholder: "Seu nome" %>
+      </div>
 
-<h3>Cancel my account</h3>
+      <div class="field">
+        <%= f.label :email, class: 'block font-semibold' %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'mt-1 block w-full border border-gray-300 rounded-md p-2', placeholder: "Seu email" %>
+      </div>
 
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
+      <div class="field">
+        <%= f.label :avatar, class: 'block font-semibold' %>
+        <%= f.url_field :avatar, class: 'mt-1 block w-full border border-gray-300 rounded-md p-2', placeholder: "URL da imagem (ex: https://github.com/eltonsantos.png)" %>
+      </div>
 
-<%= link_to "Back", :back %>
+      <div class="field">
+        <%= f.label :hours_per_week, class: 'block font-semibold' %>
+        <%= f.text_field :hours_per_week, class: 'mt-1 block w-full border border-gray-300 rounded-md p-2', placeholder: "Quantidade de horas trabalhadas por semana" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password, class: 'block font-semibold' %>
+        <%= f.password_field :password, autocomplete: "new-password", class: 'mt-1 block w-full border border-gray-300 rounded-md p-2', placeholder: "Nova senha (deixe em branco para não alterar)" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation, class: 'block font-semibold' %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'mt-1 block w-full border border-gray-300 rounded-md p-2', placeholder: "Confirme a nova senha" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :current_password, class: 'block font-semibold' %>
+        <%= f.password_field :current_password, autocomplete: "current-password", class: 'mt-1 block w-full border border-gray-300 rounded-md p-2', placeholder: "Senha atual" %>
+      </div>
+
+      <div class="actions mt-4">
+        <%= f.submit "Atualizar", class: 'bg-blue-600 text-white font-semibold py-2 px-4 rounded' %>
+      </div>
+    <% end %>
+
+    <h3 class="text-lg font-semibold mt-6">Cancelar minha conta</h3>
+    <div>
+      Unhappy? <%= button_to "Cancelar minha conta", registration_path(resource_name), data: { confirm: "Você tem certeza?" }, method: :delete, class: 'text-red-600' %>
+    </div>
+
+    <%= link_to "Voltar", :back, class: 'mt-4 text-blue-500' %>
+  </main>
+</div>

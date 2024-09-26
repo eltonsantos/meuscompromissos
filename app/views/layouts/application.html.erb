@@ -30,9 +30,9 @@
               <%= lucide_icon('triangle-alert', class: 'text-yellow-300 mr-2') %>
               Você tem 3 horas livres no seu dia
             </span>
-            <a href="/profile" id="avatar-profile" class="flex items-center justify-center">
+            <a href="<%= edit_user_registration_path %>" id="avatar-profile" class="flex items-center justify-center">
               <p class="mr-2 text-end">
-                <b>Elton Santos</b>
+                <b><%= current_user.name %></b>
                 <br />
                 <span class="text-gray-30">Ver perfil</span>
               </p>
@@ -45,7 +45,7 @@
       <section id="summary" class="bg-stone-800 text-white h-25">
         <div class="container mx-auto p-4 flex justify-between border-t border-stone-700" style="max-width: 1224px;">
           <h2 class="sr-only">Sumário</h2>
-          <div class="grid grid-cols-3 gap-4">
+          <div class="grid grid-cols-5">
             <div class="bg-gray p-4">
               <strong>5</strong>
               Tarefas ao total
@@ -56,7 +56,15 @@
             </div>
             <div class="bg-gray p-4">
               <strong>3</strong>
-              Encerradas
+              Concluídas
+            </div>
+            <div class="bg-gray p-4">
+              <strong>0</strong>
+              Arquivadas
+            </div>
+            <div class="bg-gray p-4">
+              <strong>50%</strong>
+              Progresso
             </div>
           </div>
           <% if current_user.has_active_commitments? %>
@@ -77,7 +85,7 @@
         </div>
       </section>
 
-      <main class="mx-auto p-4 flex justify-between items-center" style="max-width: 1224px;">
+      <main class="mx-auto p-4 items-center" style="max-width: 1224px;">
         <%= yield %>
       </main>
     <% else %>
