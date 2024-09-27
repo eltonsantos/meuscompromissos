@@ -45,8 +45,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_25_044401) do
     t.bigint "category_id", null: false
     t.bigint "commitment_id", null: false
     t.decimal "hours", precision: 5, scale: 2, null: false
-    t.boolean "status", default: false
-    t.boolean "archived", default: false
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_tasks_on_category_id"

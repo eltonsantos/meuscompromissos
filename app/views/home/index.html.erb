@@ -4,7 +4,7 @@
     <% if @tasks.any? %>
       <div class="cards">
         <% @tasks.each do |task| %>
-          <div class="card relative grid grid-cols-6 gap-4 mb-2 p-8 transition-all bg-white duration-200 hover:bg-gradient-to-r from-orange-100 to-white rounded items-center" data-id="<%= task.id %>">
+          <div class="card relative grid grid-cols-6 gap-4 mb-2 p-8 transition-all border rounded items-center <%= task.status == "in_progress" ? "bg-white duration-200 hover:bg-gradient-to-r from-orange-100 to-white border-slate-300" : "" %> <%= task.status == "archived" ? "bg-slate-300 text-slate-400 border-slate-300" : "" %> <%= task.status == "completed" ? "bg-green-300 text-green-600 border-green-400" : "" %>" data-id="<%= task.id %>">
             <div class="col-span-2 text-start">
               <%= link_to task_path(task.id), data: { turbo_frame: "modal" } do %>  
                 <div class="flex gap-4 items-center">
@@ -21,15 +21,33 @@
               <span class="block text-xs font-semibold uppercase">Categoria</span>
               <p class="font-semibold"><%= task.category.name %></p>
             </div>
-            <div class="col-span-1 flex items-center justify-center text-blue-600 font-semibold">
-              <%= task.status == true ? 'Concluída' : 'Em andamento' %>
+            <div class="col-span-1 flex items-center justify-center font-semibold">      
+              <% case task.status %>
+              <% when "archived" %>
+                <div class="text-slate-400">
+                  Arquivada
+                </div>
+              <% when "completed" %>
+                <div class="text-green-600">
+                  Concluída
+                </div>
+              <% else %>
+                <div class="text-blue-600">
+                  Em andamento
+                </div>
+              <% end %>
             </div>
             <div class="col-span-1 flex justify-end items-center gap-3">
               <p class="sr-only">Ações</p>
-              <%= link_to lucide_icon('check-check', class: 'text-green-500 hover:text-green-600'), edit_task_path(task.id), title: 'Marcar como concluída' %>
-              <%= link_to lucide_icon('archive', class: 'text-gray-500 hover:text-gray-600'), edit_task_path(task.id), title: 'Arquivar Tarefa' %>
-              <%= link_to lucide_icon('edit', class: 'text-blue-500 hover:text-blue-600'), edit_task_path(task.id), title: 'Editar Tarefa' %>
-              <%= link_to lucide_icon('trash', class: 'text-red-500 hover:text-red-600'), task_path(task.id), method: :delete, data: { confirm: 'Você tem certeza que deseja excluir esta tarefa?' }, title: 'Remover Tarefa' %>
+              <% if task.status == 'archived' %>
+                <%= link_to lucide_icon('archive-restore', class: 'text-slate-400 hover:text-slate-500'), edit_task_path(task.id), title: 'Desarquivar Tarefa' %>
+              <% elsif task.status == 'completed' %>
+              <% else %>
+                <%= link_to lucide_icon('check-check', class: 'text-green-500 hover:text-green-600'), edit_task_path(task.id), title: 'Marcar como concluída' %>
+                <%= link_to lucide_icon('archive', class: 'text-gray-500 hover:text-gray-600'), edit_task_path(task.id), title: 'Arquivar Tarefa' %>
+                <%= link_to lucide_icon('edit', class: 'text-blue-500 hover:text-blue-600'), edit_task_path(task.id), title: 'Editar Tarefa' %>
+                <%= link_to lucide_icon('trash', class: 'text-red-500 hover:text-red-600'), task_path(task.id), method: :delete, data: { confirm: 'Você tem certeza que deseja excluir esta tarefa?' }, title: 'Remover Tarefa' %>
+              <% end %>
             </div>
           </div>
         <% end %>
