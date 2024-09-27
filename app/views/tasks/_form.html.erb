@@ -17,6 +17,11 @@
   </div>
 
   <div class="my-5">
+    <%= form.label :hours, "Horas alocadas" %>
+    <%= form.number_field :hours, step: 0.25, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
     <%= form.label :description, "Descrição" %>
     <%= form.text_area :description, rows: 4, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
@@ -27,12 +32,7 @@
     <%= link_to "Cadastrar nova categoria", new_category_path, class: "text-blue-600 hover:underline ml-2", data: { turbo_frame: "modal" } %>
   </div>
 
-  <div class="my-5">
-    <%= form.label :hours, "Horas alocadas" %>
-    <%= form.number_field :hours, step: 0.25, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="inline">
+  <div class="text-right">
     <%= form.submit "Criar tarefa", class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
   </div>
 <% end %>

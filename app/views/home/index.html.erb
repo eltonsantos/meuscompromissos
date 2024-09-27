@@ -4,7 +4,7 @@
     <% if @tasks.any? %>
       <div class="cards">
         <% @tasks.each do |task| %>
-          <div class="card relative grid grid-cols-6 gap-4 mb-2 p-8 transition-all border rounded items-center <%= task.status == "in_progress" ? "bg-white duration-200 hover:bg-gradient-to-r from-orange-100 to-white border-slate-300" : "" %> <%= task.status == "archived" ? "bg-slate-300 text-slate-400 border-slate-300" : "" %> <%= task.status == "completed" ? "bg-green-300 text-green-600 border-green-400" : "" %>" data-id="<%= task.id %>">
+          <div class="card group relative grid grid-cols-6 gap-4 mb-2 p-8 transition-all border rounded items-center <%= task.status == "in_progress" ? "bg-white duration-200 hover:bg-gradient-to-r from-orange-100 to-white border-slate-300" : "" %> <%= task.status == "archived" ? "bg-slate-300 text-slate-400 border-slate-300" : "" %> <%= task.status == "completed" ? "bg-green-300 text-green-600 border-green-400" : "" %>" data-id="<%= task.id %>">
             <div class="col-span-2 text-start">
               <%= link_to task_path(task.id), data: { turbo_frame: "modal" } do %>  
                 <div class="flex gap-4 items-center">
@@ -37,7 +37,7 @@
                 </div>
               <% end %>
             </div>
-            <div class="col-span-1 flex justify-end items-center gap-3">
+            <div class="col-span-1 flex justify-end items-center gap-3 hidden group-hover:flex">
               <p class="sr-only">Ações</p>
               <% if task.status == 'archived' %>
                 <%= button_to lucide_icon('archive-restore', class: 'text-slate-400 hover:text-slate-500 justify-center items-center'), unarchive_task_path(task), method: :patch, title: 'Desarquivar Tarefa' %>
