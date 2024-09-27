@@ -37,7 +37,7 @@
                 </div>
               <% end %>
             </div>
-            <div class="col-span-1 flex justify-end items-center gap-3 hidden group-hover:flex">
+            <div class="col-span-1 justify-end items-center gap-3 hidden group-hover:flex">
               <p class="sr-only">Ações</p>
               <% if task.status == 'archived' %>
                 <%= button_to lucide_icon('archive-restore', class: 'text-slate-400 hover:text-slate-500 justify-center items-center'), unarchive_task_path(task), method: :patch, title: 'Desarquivar Tarefa' %>
