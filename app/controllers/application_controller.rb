@@ -18,6 +18,8 @@ class ApplicationController < ActionController::Base
   end
 
   def set_task_statistics
+    return unless user_signed_in?
+    
     @commitments = current_user.commitments.includes(:tasks)
 
     @total_tasks = @commitments.flat_map(&:tasks).size

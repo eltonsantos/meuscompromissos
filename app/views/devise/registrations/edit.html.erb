@@ -15,6 +15,7 @@
       <%= link_to "Ver compromissos anteriores", root_path, class: "text-blue-400 font-semibold rounded transition duration-200 hover:text-blue-500" %>
       <%= link_to "Histórico de modificações", root_path, class: "text-blue-400 font-semibold rounded transition duration-200 hover:text-blue-500" %>
       <%= link_to "Categorias cadastradas", categories_path, class: "text-blue-400 font-semibold rounded transition duration-200 hover:text-blue-500" %>
+      <%= button_to "Sair", destroy_user_session_path, method: :delete, class: "text-blue-400 font-semibold rounded transition duration-200 hover:text-blue-500" %>
     </div>
 
   </aside>  
