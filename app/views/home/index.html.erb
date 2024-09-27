@@ -40,13 +40,13 @@
             <div class="col-span-1 flex justify-end items-center gap-3">
               <p class="sr-only">Ações</p>
               <% if task.status == 'archived' %>
-                <%= link_to lucide_icon('archive-restore', class: 'text-slate-400 hover:text-slate-500'), title: 'Desarquivar Tarefa' %>
+                <%= button_to lucide_icon('archive-restore', class: 'text-slate-400 hover:text-slate-500 justify-center items-center'), unarchive_task_path(task), method: :patch, title: 'Desarquivar Tarefa' %>
               <% elsif task.status == 'completed' %>
               <% else %>
-                <%= link_to lucide_icon('check-check', class: 'text-green-500 hover:text-green-600'), mark_completed_task_path(task.id), method: :patch, title: 'Marcar como concluída' %>
-                <%= link_to lucide_icon('archive', class: 'text-gray-500 hover:text-gray-600'), archive_task_path(task.id), method: :patch, title: 'Arquivar Tarefa' %>
-                <%= link_to lucide_icon('edit', class: 'text-blue-500 hover:text-blue-600'), edit_task_path(task.id), title: 'Editar Tarefa' %>
-                <%= link_to lucide_icon('trash', class: 'text-red-500 hover:text-red-600'), task_path(task.id), method: :delete, data: { confirm: 'Você tem certeza que deseja excluir esta tarefa?' }, title: 'Remover Tarefa' %>
+                <%= button_to lucide_icon('check-check', class: 'text-green-500 hover:text-green-600 items-center justify-center '), mark_completed_task_path(task.id), method: :patch, title: 'Marcar como concluída', class: "mt-2" %>
+                <%= button_to lucide_icon('archive', class: 'text-gray-500 hover:text-gray-600 items-center justify-center '), archive_task_path(task), method: :patch, title: 'Arquivar Tarefa', class: "mt-2" %>
+                <%= link_to lucide_icon('edit', class: 'text-blue-500 hover:text-blue-600 items-center justify-center '), edit_task_path(task.id), title: 'Editar Tarefa' %>
+                <%= link_to lucide_icon('trash', class: 'text-red-500 hover:text-red-600 items-center justify-center '), task_path(task.id), method: :delete, data: { confirm: 'Você tem certeza que deseja excluir esta tarefa?' }, title: 'Remover Tarefa' %>
               <% end %>
             </div>
           </div>
