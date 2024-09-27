@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   get "home/index"
-  resources :tasks
+  resources :tasks do
+    member do
+      patch 'mark_completed'
+      patch 'archive'
+      patch 'unarchive'
+    end
+  end
   resources :categories
   resources :commitments
   devise_for :users

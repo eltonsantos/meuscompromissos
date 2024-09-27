@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   
   def index
-    @tasks = Task.all
+    @tasks = Task.all.order(:id)
     @commitments = current_user.commitments.includes(:tasks)
     
     @total_tasks = @commitments.flat_map(&:tasks).size

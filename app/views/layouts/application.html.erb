@@ -27,8 +27,17 @@
               <h1><b>MEUS COMPROMISSOS</b></h1>
             <% end %>
             <span id="notification" class="flex items-center mx-4">
-              <%= lucide_icon('triangle-alert', class: 'text-yellow-300 mr-2') %>
-              Você tem <%= @available_hours %> horas livres no seu dia
+              
+              <% if @available_hours > 1 %>
+                <%= lucide_icon('check', class: 'text-green-300 mr-2') %>
+                Você tem <%= @available_hours %> horas livres no seu dia
+              <% elsif @available_hours == 1 %>
+                <%= lucide_icon('triangle-alert', class: 'text-yellow-300 mr-2') %>
+                Você tem <%= @available_hours %> hora livre no seu dia
+              <% else %>
+                <%= lucide_icon('x', class: 'text-red-300 mr-2') %>
+                Você não horas livres no seu dia
+              <% end %>
             </span>
             <a href="<%= edit_user_registration_path %>" id="avatar-profile" class="flex items-center justify-center">
               <p class="mr-2 text-end">

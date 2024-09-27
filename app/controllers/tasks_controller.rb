@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: %i[ show edit update destroy ]
+  before_action :set_task, only: %i[ show edit update destroy mark_completed archive unarchive ]
 
   # GET /tasks/1 or /tasks/1.json
   def show
@@ -65,6 +65,21 @@ class TasksController < ApplicationController
       format.html { redirect_to tasks_path, status: :see_other, notice: "Task was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def mark_completed
+    @task.update(status: :completed)
+    redirect_to root_path, notice: "Tarefa marcada como concluída."
+  end
+
+  def archive
+    @task.update(status: :archived)
+    redirect_to root_path, notice: "Tarefa arquivada."
+  end
+
+  def unarchive
+    @task.update(status: :in_progress)
+    redirect_to root_path, notice: "Tarefa desarquivada."
   end
 
   private
