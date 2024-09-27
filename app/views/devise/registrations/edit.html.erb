@@ -39,7 +39,7 @@
 
       <div class="field">
         <%= f.label :hours_per_week, class: 'block font-semibold' %>
-        <%= f.text_field :hours_per_week, class: 'mt-1 block w-full border border-gray-300 rounded-md p-2', placeholder: "Quantidade de horas trabalhadas por semana" %>
+        <%= f.number_field :hours_per_week, step: 0.25, class: 'mt-1 block w-full border border-gray-300 rounded-md p-2', placeholder: "Quantidade de horas trabalhadas por semana" %>
       </div>
 
       <div class="field">

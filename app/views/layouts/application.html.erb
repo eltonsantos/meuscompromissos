@@ -28,7 +28,7 @@
             <% end %>
             <span id="notification" class="flex items-center mx-4">
               <%= lucide_icon('triangle-alert', class: 'text-yellow-300 mr-2') %>
-              Você tem 3 horas livres no seu dia
+              Você tem <%= @available_hours %> horas livres no seu dia
             </span>
             <a href="<%= edit_user_registration_path %>" id="avatar-profile" class="flex items-center justify-center">
               <p class="mr-2 text-end">

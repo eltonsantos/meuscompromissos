@@ -7,5 +7,5 @@ class Task < ApplicationRecord
   enum status: { in_progress: 0, archived: 1, completed: 2 }
 
   validates :title, presence: true
-  validates :hours, numericality: { greater_than: 0 }
+  validates :hours, numericality: { greater_than: 0, allow_blank: true }
 end
