@@ -3,15 +3,12 @@ class CategoriesController < ApplicationController
 
   # GET /categories or /categories.json
   def index
-    @categories = Category.joins(tasks: :commitment).where(commitments: { user_id: current_user.id }).distinct
+    @categories = current_user.categories
   end
 
   # GET /categories/new
   def new
     @category = Category.new
-    @categories = Category.joins(tasks: :commitment)
-                        .where(commitments: { user_id: current_user.id })
-                        .distinct
   end
 
   # GET /categories/1/edit
@@ -21,6 +18,7 @@ class CategoriesController < ApplicationController
   # POST /categories or /categories.json
   def create
     @category = Category.new(category_params)
+    @category.user = current_user
 
     respond_to do |format|
       if @category.save
