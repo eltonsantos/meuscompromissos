@@ -1,4 +1,5 @@
 User.create!(email: 'admin@admin.com', password: '123456', name: 'Admin', hours_per_week: 40)
+User.create!(email: 'elton@elton.com', password: '123456', name: 'Elton', hours_per_week: 40)
 
 Category.create!(name: "Desenvolvimento") 
 

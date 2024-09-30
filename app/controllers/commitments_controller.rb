@@ -3,7 +3,7 @@ class CommitmentsController < ApplicationController
 
   # GET /commitments or /commitments.json
   def index
-    @commitments = Commitment.all
+    @commitments = Commitment.where(user_id: current_user.id)
   end
 
   # GET /commitments/1 or /commitments/1.json
@@ -22,11 +22,19 @@ class CommitmentsController < ApplicationController
 
   # POST /commitments or /commitments.json
   def create
+
+    if current_user.commitments.where(active: true).exists?
+      flash[:alert] = "Você já tem um compromisso ativo. É permitido apenas um compromisso ativo por vez."
+      render :new and return
+    end
+    
     @commitment = Commitment.new(commitment_params)
+    @commitment.user = current_user
+    @commitment.active = true
 
     respond_to do |format|
       if @commitment.save
-        format.html { redirect_to @commitment, notice: "Commitment was successfully created." }
+        format.html { redirect_to root_path, notice: "Commitment was successfully created." }
         format.json { render :show, status: :created, location: @commitment }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +47,7 @@ class CommitmentsController < ApplicationController
   def update
     respond_to do |format|
       if @commitment.update(commitment_params)
-        format.html { redirect_to @commitment, notice: "Commitment was successfully updated." }
+        format.html { redirect_to root_path, notice: "Commitment was successfully updated." }
         format.json { render :show, status: :ok, location: @commitment }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -66,6 +74,6 @@ class CommitmentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def commitment_params
-      params.require(:commitment).permit(:description, :user_id, :progress)
+      params.require(:commitment).permit(:description, :progress)
     end
 end
