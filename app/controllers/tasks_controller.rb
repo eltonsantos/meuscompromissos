@@ -8,9 +8,7 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @task = Task.new
-    @categories = Category.joins(tasks: :commitment)
-                        .where(commitments: { user_id: current_user.id })
-                        .distinct
+    @categories = current_user.categories.distinct
   end
 
   # GET /tasks/1/edit

@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   
   def index
-    @tasks = current_user.commitments.includes(:tasks).flat_map(&:tasks)
+    @tasks = Task.joins(commitment: :user).where(users: { id: current_user.id })
   end
 end

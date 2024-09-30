@@ -3,12 +3,12 @@
     <h1 class="sr-only">Trabalhos</h1>
     <% if @tasks.any? %>
       <div class="cards">
-        <% @tasks.each do |task| %>
+        <% @tasks.each_with_index do |task, index| %>
           <div class="card group relative grid grid-cols-6 gap-4 mb-2 p-8 transition-all border rounded items-center <%= task.status == "in_progress" ? "bg-white duration-200 hover:bg-gradient-to-r from-orange-100 to-white border-slate-300" : "" %> <%= task.status == "archived" ? "bg-slate-300 text-slate-400 border-slate-300" : "" %> <%= task.status == "completed" ? "bg-green-300 text-green-600 border-green-400" : "" %>" data-id="<%= task.id %>">
             <div class="col-span-2 text-start">
               <%= link_to task_path(task.id), data: { turbo_frame: "modal" } do %>  
                 <div class="flex gap-4 items-center">
-                  <span><%= task.id %></span>
+                  <span><%= index + 1 %></span>
                   <div class="text-xl font-semibold"><%= task.title %></div>
                 </div>
               <% end %>
