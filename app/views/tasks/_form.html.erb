@@ -29,7 +29,7 @@
   <div class="my-5">
     <%= form.label :category_id, "Categoria" %>
     <%= category_select(form) %>
-    <%= link_to "Cadastrar nova categoria", new_category_path, class: "text-blue-600 hover:underline ml-2", data: { turbo_frame: "modal" } %>
+    <% link_to "Cadastrar nova categoria", new_category_path, class: "text-blue-600 hover:underline ml-2", data: { turbo_frame: "modal" } %>
   </div>
 
   <div class="text-right">

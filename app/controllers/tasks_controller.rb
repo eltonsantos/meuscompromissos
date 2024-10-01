@@ -46,6 +46,18 @@ class TasksController < ApplicationController
 
   # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
+
+    total_hours_used = current_user.commitments.flat_map(&:tasks).pluck(:hours).sum || 0
+    available_hours = current_user.hours_per_week - total_hours_used
+
+    if @task.hours > available_hours
+      flash[:alert] = "Você não tem horas livres suficientes para cadastrar essa tarefa."
+      render :new and return
+    elsif @task.hours <= 0
+      flash[:alert] = "A tarefa deve ter horas positivas."
+      render :new and return
+    end
+    
     respond_to do |format|
       if @task.update(task_params)
         format.html { redirect_to root_path, notice: "Task was successfully updated." }
