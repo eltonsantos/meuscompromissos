@@ -28,8 +28,8 @@ module TasksHelper
           before_value = Category.find_by(id: before_value)&.name || before_value if before_value
           after_value = Category.find_by(id: after_value)&.name || after_value if after_value
         elsif attribute == :commitment_id
-          before_value = Commitment.find_by(id: before_value)&.title || before_value if before_value
-          after_value = Commitment.find_by(id: after_value)&.title || after_value if after_value
+          before_value = Commitment.find_by(id: before_value)&.description || before_value if before_value
+          after_value = Commitment.find_by(id: after_value)&.description || after_value if after_value
         end
 
         before_value, after_value = [before_value, after_value].map do |value|

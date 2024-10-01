@@ -84,7 +84,6 @@ The "Meus Compromissos" system is a practical tool for managing weekly tasks and
 - [ ] Cobrir o sistema de testes! 👁‍🗨
 - [ ] Refatorar código! 👁‍🗨
 - [ ] Criação da página de estatísticas 🔎
-- [ ] Criação da página de histórico de modificações 🗃️
 - [ ] Criação da página de compromissos anteriores 🗓️
 - [ ] Alterar visual em dark/light mode 🌗
 - [ ] Layout responsivo 1️⃣
