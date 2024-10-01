@@ -66,6 +66,10 @@ class CommitmentsController < ApplicationController
     end
   end
 
+  def previous
+    @previous_commitments = current_user.commitments.where(active: false).where('created_at <= ?', 7.days.ago).includes(:tasks).order(created_at: :desc)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_commitment

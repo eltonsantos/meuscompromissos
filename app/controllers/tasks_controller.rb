@@ -85,7 +85,8 @@ class TasksController < ApplicationController
   end
 
   def activities
-    @activities = PaperTrail::Version.where(item_type: "Task").order(created_at: :desc)
+    task_ids = current_user.commitments.flat_map(&:tasks).pluck(:id)
+    @activities = PaperTrail::Version.where(item_type: "Task", item_id: task_ids).order(created_at: :desc)
   end
 
   private
