@@ -30,10 +30,10 @@
               
               <% if @available_hours > 1 %>
                 <%= lucide_icon('check', class: 'text-green-300 mr-2') %>
-                Você tem <%= @available_hours %> horas livres no seu dia
+                Você tem <%= @formatted_available_hours %> horas livres no seu dia
               <% elsif @available_hours == 1 %>
                 <%= lucide_icon('triangle-alert', class: 'text-yellow-300 mr-2') %>
-                Você tem <%= @available_hours %> hora livre no seu dia
+                Você tem <%= @formatted_available_hours %> hora livre no seu dia
               <% else %>
                 <%= lucide_icon('x', class: 'text-red-300 mr-2') %>
                 Você não tem horas livres no seu dia
@@ -57,16 +57,13 @@
               <div class="absolute right-0 w-48 bg-stone-800 rounded-lg border border-yellow-500 shadow-lg hidden group-hover:block z-50">
                 <ul class="py-1">
                   <li>
-                    <%= link_to "Editar perfil", edit_user_registration_path, class: "block px-4 py-2 text-white  hover:text-gray-300" %>
-                  </li>
-                  <li>
-                    <%= link_to "Compromissos anteriores", edit_user_registration_path, class: "block px-4 py-2 text-white  hover:text-gray-300" %>
+                    <%= link_to "Compromissos anteriores", '#', class: "block px-4 py-2 text-white  hover:text-gray-300" %>
                   </li>
                   <li>
                     <%= link_to "Listar categorias", categories_path, class: "block px-4 py-2 text-white  hover:text-gray-300" %>
                   </li>
                   <li>
-                    <%= link_to "Histórico de modificações", edit_user_registration_path, class: "block px-4 py-2 text-white  hover:text-gray-300" %>
+                    <%= link_to "Histórico de modificações", '#', class: "block px-4 py-2 text-white  hover:text-gray-300" %>
                   </li>
                   <li class="border-t border-gray-200"></li>
                   <li>

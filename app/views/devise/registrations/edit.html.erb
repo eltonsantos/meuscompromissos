@@ -18,7 +18,12 @@
             <h2 class="text-2xl font-semibold mb-4"><%= resource.name %></h2>
             <p class="text-lg">
               Quantidade de horas que trabalha na semana: <br />
-              <strong class="text-5xl"><%= resource.hours_per_week %></strong>
+              <strong class="text-4xl"><%= resource.formatted_hours_per_week %></strong>
+            </p>
+            <br />
+            <p class="text-lg">
+              Tempo restante do compromisso: <br />
+              <strong class="text-4xl"><%= resource.commitments.last.time_remaining if resource.commitments.any? %></strong>
             </p>
           </aside>  
           <main class="flex-1 p-4">
@@ -79,8 +84,7 @@
       </div>
       <div id="tab2" class="hidden tab-content text-gray-700">
         <h4 class="font-bold mt-9 mb-4 text-2xl">Estatística</h4>
-        <p class="text-xl">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias aspernatur rem itaque
-          doloribus culpa similique rerum provident id quos sed.</p>
+        <p class="text-xl">Aguarde as próximas atualizações.</p>
       </div>
     </div>
   </div>

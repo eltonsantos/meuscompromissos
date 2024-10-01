@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
     commitments = current_user.commitments.includes(:tasks)
     total_hours_used = commitments.flat_map(&:tasks).pluck(:hours).sum || 0
     @available_hours = current_user.hours_per_week - total_hours_used
+    @formatted_available_hours = current_user.formatted_available_hours(@available_hours)
   end
 
   def set_task_statistics

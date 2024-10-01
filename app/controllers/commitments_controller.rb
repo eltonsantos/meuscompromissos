@@ -13,7 +13,7 @@ class CommitmentsController < ApplicationController
   # GET /commitments/new
   def new
     @commitment = Commitment.new
-    @previous_tasks = Task.where(archived: true, completed: false, commitment: current_user.commitments.last)
+    # @previous_tasks = Task.where(status: 0, commitment: current_user.commitments.last)
   end
 
   # GET /commitments/1/edit
