@@ -38,15 +38,17 @@ class User < ApplicationRecord
     hours = total_minutes / 60
     minutes = total_minutes % 60
 
-    hours_text = hours == 1 ? "#{hours} hora" : "#{hours} horas"
-    minutes_text = minutes == 1 ? "#{minutes} minuto" : "#{minutes} minutos"
+    hours_text = hours == 1 ? "1 hora" : "#{hours} horas"
+    minutes_text = minutes == 1 ? "1 minuto livre" : "#{minutes} minutos"
 
     if hours > 0 && minutes > 0
-      "#{hours_text} e #{minutes_text}"
+      "#{hours_text} e #{minutes_text} livres no seu dia"
+    elsif hours == 1
+      "#{hours_text} livre no seu dia"
     elsif hours > 0
-      hours_text
+      "#{hours_text} livres no seu dia"
     else
-      minutes_text
+      "#{minutes_text} no seu dia"
     end
   end
 end

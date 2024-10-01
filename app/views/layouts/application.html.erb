@@ -30,10 +30,10 @@
               
               <% if @available_hours > 1 %>
                 <%= lucide_icon('check', class: 'text-green-300 mr-2') %>
-                Você tem <%= @formatted_available_hours %> horas livres no seu dia
+                Você tem <%= @formatted_available_hours %>
               <% elsif @available_hours == 1 %>
                 <%= lucide_icon('triangle-alert', class: 'text-yellow-300 mr-2') %>
-                Você tem <%= @formatted_available_hours %> hora livre no seu dia
+                Você tem <%= @formatted_available_hours %>
               <% else %>
                 <%= lucide_icon('x', class: 'text-red-300 mr-2') %>
                 Você não tem horas livres no seu dia
