@@ -42,13 +42,13 @@ class User < ApplicationRecord
     minutes_text = minutes == 1 ? "1 minuto livre" : "#{minutes} minutos"
 
     if hours > 0 && minutes > 0
-      "#{hours_text} e #{minutes_text} livres no seu dia"
+      "#{hours_text} e #{minutes_text} livres na sua semana"
     elsif hours == 1
-      "#{hours_text} livre no seu dia"
+      "#{hours_text} livre na sua semana"
     elsif hours > 0
-      "#{hours_text} livres no seu dia"
+      "#{hours_text} livres na sua semana"
     else
-      "#{minutes_text} no seu dia"
+      "#{minutes_text} na sua semana"
     end
   end
 end
