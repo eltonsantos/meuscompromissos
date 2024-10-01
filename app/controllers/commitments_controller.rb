@@ -34,7 +34,7 @@ class CommitmentsController < ApplicationController
 
     respond_to do |format|
       if @commitment.save
-        format.html { redirect_to root_path, notice: "Commitment was successfully created." }
+        format.html { redirect_to root_path, notice: "Compromisso foi criado com sucesso." }
         format.json { render :show, status: :created, location: @commitment }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -47,7 +47,7 @@ class CommitmentsController < ApplicationController
   def update
     respond_to do |format|
       if @commitment.update(commitment_params)
-        format.html { redirect_to root_path, notice: "Commitment was successfully updated." }
+        format.html { redirect_to root_path, notice: "Compromisso foi atualizado com sucesso." }
         format.json { render :show, status: :ok, location: @commitment }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -61,7 +61,7 @@ class CommitmentsController < ApplicationController
     @commitment.destroy!
 
     respond_to do |format|
-      format.html { redirect_to commitments_path, status: :see_other, notice: "Commitment was successfully destroyed." }
+      format.html { redirect_to commitments_path, status: :see_other, notice: "Compromisso foi removido com sucesso." }
       format.json { head :no_content }
     end
   end
