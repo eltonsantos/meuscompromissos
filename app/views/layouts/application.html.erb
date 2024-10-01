@@ -97,7 +97,7 @@
               Arquivadas
             </div>
             <div class="bg-gray p-4 text-white">
-              <strong><%= @progress_percentage %>%</strong>
+              <strong><%= number_to_percentage(@progress_percentage, precision: @progress_percentage.to_i == @progress_percentage ? 0 : 2, locale: :'pt-BR') %></strong>
               Progresso
             </div>
           </div>

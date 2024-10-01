@@ -1,0 +1,17 @@
+pt-BR:
+  number:
+    format:
+      separator: ","
+      delimiter: "."
+    currency:
+      format:
+        format: "%u%n"
+        unit: "R$"
+        separator: ","
+        delimiter: "."
+  date:
+    formats:
+      default: "%d/%m/%Y"
+  time:
+    formats:
+      default: "%H:%M"
