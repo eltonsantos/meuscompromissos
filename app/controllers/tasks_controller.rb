@@ -84,6 +84,10 @@ class TasksController < ApplicationController
     redirect_to root_path, notice: "Tarefa desarquivada."
   end
 
+  def activities
+    @activities = PaperTrail::Version.where(item_type: "Task").order(created_at: :desc)
+  end
+
   private
 
     def hours_exceed_limit?(new_task_hours, previous_hours = 0)

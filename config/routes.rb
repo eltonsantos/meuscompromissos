@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get "home/index"
   resources :tasks do
+    get :activities, on: :collection
     member do
       patch 'mark_completed'
       patch 'archive'

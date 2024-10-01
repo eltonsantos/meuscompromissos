@@ -35,6 +35,7 @@ class CreateVersions < ActiveRecord::Migration[7.2]
       t.string   :item_type, null: false
       t.string   :event,     null: false
       t.text     :object, limit: TEXT_BYTES
+      
     end
     add_index :versions, %i[item_type item_id]
   end
