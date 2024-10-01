@@ -17,7 +17,7 @@
 
 ## 🧪 Technologies and Gems
 
-This project was developed using the following technologies:
+This project was developed using the following technologies and Gems:
 
 - [Ruby 3.3.4](https://ruby-lang.org/)
 - [Rails 7.2.1](https://rubyonrails.org/)
@@ -84,7 +84,6 @@ The "Meus Compromissos" system is a practical tool for managing weekly tasks and
 - [ ] Cobrir o sistema de testes! 👁‍🗨
 - [ ] Refatorar código! 👁‍🗨
 - [ ] Criação da página de estatísticas 🔎
-- [ ] Criação da página de compromissos anteriores 🗓️
 - [ ] Alterar visual em dark/light mode 🌗
 - [ ] Layout responsivo 1️⃣
 - [ ] Criar paginação 🥖
