@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   def set_available_hours
     return unless user_signed_in?
 
-    commitments = current_user.commitments.includes(:tasks)
+    commitments = current_user.commitments.where(active: true).includes(:tasks)
     total_hours_used = commitments.flat_map(&:tasks).pluck(:hours).sum || 0
     @available_hours = current_user.hours_per_week - total_hours_used
     @formatted_available_hours = current_user.formatted_available_hours(@available_hours)
@@ -23,10 +23,10 @@ class ApplicationController < ActionController::Base
     
     @commitments = current_user.commitments.includes(:tasks)
 
-    @total_tasks = @commitments.flat_map(&:tasks).size
-    @in_progress = @commitments.flat_map(&:tasks).select { |task| task.in_progress? }.size
-    @completed = @commitments.flat_map(&:tasks).select { |task| task.completed? }.size
-    @archived = @commitments.flat_map(&:tasks).select { |task| task.archived? }.size
+    @total_tasks = @commitments.where(active: true).flat_map(&:tasks).size
+    @in_progress = @commitments.where(active: true).flat_map(&:tasks).select { |task| task.in_progress? }.size
+    @completed = @commitments.where(active: true).flat_map(&:tasks).select { |task| task.completed? }.size
+    @archived = @commitments.where(active: true).flat_map(&:tasks).select { |task| task.archived? }.size
     @progress_percentage = @total_tasks.zero? ? 0 : (@completed.to_f / @total_tasks * 100).round(2)
   end
 

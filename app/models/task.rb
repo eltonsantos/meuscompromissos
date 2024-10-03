@@ -34,4 +34,17 @@ class Task < ApplicationRecord
       minutes_text
     end
   end
+
+  def formatted_status
+    case status
+    when "in_progress"
+      "Em andamento"
+    when "archived"
+      "Arquivada"
+    when "completed"
+      "Concluída"
+    else
+      "Status desconhecido"
+    end
+  end
 end

@@ -19,7 +19,7 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     
-    @task.commitment = current_user.commitments.find_by(active: true)
+    @task.commitment = current_user.commitments.where(active: true).find_by(active: true)
 
     if hours_exceed_limit?(@task.hours)
       flash[:alert] = "Você não tem horas livres suficientes para cadastrar essa tarefa."
@@ -92,7 +92,7 @@ class TasksController < ApplicationController
   private
 
     def hours_exceed_limit?(new_task_hours, previous_hours = 0)
-      total_hours_used = current_user.commitments.flat_map(&:tasks).pluck(:hours).sum - previous_hours
+      total_hours_used = current_user.commitments.where(active: true).flat_map(&:tasks).pluck(:hours).sum - previous_hours
       available_hours = current_user.hours_per_week - total_hours_used
 
       new_task_hours > available_hours

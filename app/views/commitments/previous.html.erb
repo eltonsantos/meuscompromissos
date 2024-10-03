@@ -12,12 +12,13 @@
   <div id="previous_commitments" class="w-full">
     <% if @previous_commitments.any? %>
       <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-blue-50">
+        <thead class="bg-stone-500 text-white">
           <tr>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">#</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Descrição do compromisso</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data de finalização</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Lista de tarefas</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">#</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Descrição do compromisso</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Data de finalização</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Progresso</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Lista de tarefas</th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
@@ -30,7 +31,10 @@
                 <div class="text-sm text-gray-900"><%= previous_commitment.description %></div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900"><%= previous_commitment.created_at.strftime('%d/%m/%Y') %></div>
+                <div class="text-sm text-gray-900"><%= previous_commitment.updated_at.strftime('%d/%m/%Y') %></div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900"><%= number_to_percentage(previous_commitment.progress, precision: @progress_percentage.to_i == @progress_percentage ? 0 : 2, locale: :'pt-BR') %></div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
                 <% if previous_commitment.tasks.any? %>
@@ -39,8 +43,8 @@
                       <li class="mb-2">
                         <strong>Título:</strong> <%= task.title %> <br>
                         <strong>Categoria:</strong> <%= task.category.name %> <br>
-                        <strong>Horas:</strong> <%= task.hours %> horas <br>
-                        <strong>Status:</strong> <%= task.status %>
+                        <strong>Horas:</strong> <%= task.formatted_hours %> <br>
+                        <strong>Status:</strong> <%= task.formatted_status %>
                       </li>
                     <% end %>
                   </ul>
