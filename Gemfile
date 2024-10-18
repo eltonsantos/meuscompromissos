@@ -36,11 +36,12 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-gem 'devise'
-gem 'kaminari'
-gem 'ransack'
-gem 'lucide-rails'
-gem 'paper_trail'
+gem "devise"
+gem "kaminari"
+gem "ransack"
+gem "lucide-rails"
+gem "paper_trail"
+gem "sidekiq"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -56,8 +57,8 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
-  gem 'bullet'
-  gem 'rails-erd'
+  gem "bullet"
+  gem "rails-erd"
 end
 
 group :test do
