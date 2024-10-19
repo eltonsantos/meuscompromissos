@@ -33,6 +33,6 @@
   </div>
 
   <div class="text-right">
-    <%= form.submit "Criar tarefa", class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    <%= form.submit task.new_record? ? "Criar tarefa" : "Atualizar tarefa", class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
   </div>
 <% end %>
