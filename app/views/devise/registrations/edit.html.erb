@@ -84,7 +84,7 @@
       </div>
       <div id="tab2" class="hidden tab-content text-gray-700">
         <h4 class="font-bold mt-9 mb-4 text-2xl">Estatística</h4>
-        <p class="text-xl">Aguarde as próximas atualizações.</p>
+        <%= render partial: 'charts/index', locals: { tarefa: Task.first } %>
       </div>
     </div>
   </div>

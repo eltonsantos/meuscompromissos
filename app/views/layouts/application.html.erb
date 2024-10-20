@@ -15,6 +15,10 @@
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
+    <%= stylesheet_link_tag 'rails_toastify', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'rails_toastify', 'data-turbo-track': 'reload' %>
+
     <%= javascript_importmap_tags %>
   </head>
   <body class="bg-slate-200">
@@ -120,6 +124,31 @@
 
       <main class="mx-auto p-4 items-center" style="max-width: 1224px;">
         <%= yield %>
+        <%= rails_toastify_container %>
+        <%= rails_toastify_script %>
+
+        <% if notice %>
+          <script>
+            RailsToastify.show('<%= notice %>',
+              { theme: '<%= RailsToastify.configuration.notice_theme %>',
+                type: '<%= RailsToastify.configuration.notice_type %>',
+                animation: '<%= RailsToastify.configuration.notice_animation %>',
+                duration: <%= RailsToastify.configuration.notice_duration %>
+              })
+          </script>
+        <% end %>
+
+        <% if alert %>
+          <script>
+            RailsToastify.show('<%= alert %>',
+              { theme: '<%= RailsToastify.configuration.alert_theme %>',
+                type: '<%= RailsToastify.configuration.alert_type %>',
+                animation: '<%= RailsToastify.configuration.alert_animation %>',
+                duration: <%= RailsToastify.configuration.alert_duration %>
+              })
+          </script>
+        <% end %>
+
         <%= turbo_frame_tag "modal", target: "_top" %>
         <footer class="w-full text-center text-gray-500 py-4 mt-12">
           © <%= Time.current.year %> <a href="https://eltonmelosantos.com.br/" target="_blank" class="hover:underline">Elton Santos</a>
@@ -127,6 +156,31 @@
       </main>
     <% else %>
       <%= yield %>
+      <%= rails_toastify_container %>
+      <%= rails_toastify_script %>
+
+      <% if notice %>
+        <script>
+          RailsToastify.show('<%= notice %>',
+            { theme: '<%= RailsToastify.configuration.notice_theme %>',
+              type: '<%= RailsToastify.configuration.notice_type %>',
+              animation: '<%= RailsToastify.configuration.notice_animation %>',
+              duration: <%= RailsToastify.configuration.notice_duration %>
+            })
+        </script>
+      <% end %>
+
+      <% if alert %>
+        <script>
+          RailsToastify.show('<%= alert %>',
+            { theme: '<%= RailsToastify.configuration.alert_theme %>',
+              type: '<%= RailsToastify.configuration.alert_type %>',
+              animation: '<%= RailsToastify.configuration.alert_animation %>',
+              duration: <%= RailsToastify.configuration.alert_duration %>
+            })
+        </script>
+      <% end %>   
+
     <% end %>
 
   </body>

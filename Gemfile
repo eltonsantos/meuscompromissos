@@ -42,6 +42,7 @@ gem "ransack"
 gem "lucide-rails"
 gem "paper_trail"
 gem "sidekiq"
+gem "rails_toastify"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
