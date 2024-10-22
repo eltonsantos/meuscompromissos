@@ -9,9 +9,9 @@ class Commitment < ApplicationRecord
 
   after_create :schedule_expiration_check
 
-  def schedule_expiration_check
-    CommitmentExpirationCheckJob.set(wait_until: created_at + 7.days).perform_later(id)
-  end
+  # def schedule_expiration_check
+  #   CommitmentExpirationCheckJob.set(wait_until: created_at + 7.days).perform_later(id)
+  # end
 
   def check_active_status
     if active && created_at < 7.days.ago

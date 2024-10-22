@@ -1,13 +1,13 @@
-class CommitmentExpirationCheckJob < ApplicationJob
-  queue_as :default
+# class CommitmentExpirationCheckJob < ApplicationJob
+#   queue_as :default
 
-  def perform(commitment_id)
-    commitment = Commitment.find_by(id: commitment_id)
+#   def perform(commitment_id)
+#     commitment = Commitment.find_by(id: commitment_id)
 
-    return unless commitment
+#     return unless commitment
 
-    if commitment.active && commitment.created_at < 7.days.ago
-      commitment.update(active: false)
-    end
-  end
-end
+#     if commitment.active && commitment.created_at < 7.days.ago
+#       commitment.update(active: false)
+#     end
+#   end
+# end
