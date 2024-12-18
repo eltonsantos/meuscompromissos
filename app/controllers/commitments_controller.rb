@@ -67,7 +67,7 @@ class CommitmentsController < ApplicationController
   end
 
   def previous
-    @previous_commitments = current_user.commitments.where(active: false).where('created_at <= ?', 7.days.ago).includes(:tasks).order(created_at: :desc)
+    @previous_commitments = current_user.commitments.where(active: false).where('created_at <= ?', 7.days.ago).includes(:tasks)
   end
 
   private
