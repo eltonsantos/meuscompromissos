@@ -1,4 +1,8 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
+  mount Sidekiq::Web => '/sidekiq'
+  
   get "home/index"
   get 'previous_commitments', to: 'commitments#previous', as: :previous_commitments
   

@@ -41,7 +41,8 @@ gem "kaminari"
 gem "ransack"
 gem "lucide-rails"
 gem "paper_trail"
-# gem "sidekiq"
+gem 'sidekiq'
+gem 'sidekiq-scheduler'
 gem "rails_toastify"
 
 group :development, :test do
