@@ -13,11 +13,11 @@ class Commitment < ApplicationRecord
   #   CommitmentExpirationCheckJob.set(wait_until: created_at + 7.days).perform_later(id)
   # end
 
-  def check_active_status
-    if active && created_at < 7.days.ago
-      update(active: false)
-    end
-  end
+  # def check_active_status
+  #   if active && created_at < 7.days.ago
+  #     update(active: false)
+  #   end
+  # end
 
   def update_progress
     total_tasks = tasks.size
