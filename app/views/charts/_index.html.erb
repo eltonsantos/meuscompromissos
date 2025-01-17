@@ -1,5 +1,9 @@
-<h2>Estatística das tarefas totais realizadas</h2>
+<h2 class="mt-8">Distribuição de Tarefas por Categoria</h2>
+<div class="w-full">
+  <canvas id="categoriesChart" class="w-full h-64"></canvas>
+</div>
 
+<h2 class="mt-8">Estatística das tarefas totais realizadas</h2>
 <div class="w-full">
   <canvas id="tasksChart" class="w-full h-64"></canvas>
 </div>
@@ -42,6 +46,51 @@
                   beginAtZero: true,
                   ticks: {
                     stepSize: 1
+                  }
+                }
+              }
+            }
+          });
+
+
+
+          const ctxPie = document.getElementById('categoriesChart').getContext('2d');
+          const categoryLabels = Object.keys(data.categories);
+          const categoryData = Object.values(data.categories);
+          
+          new Chart(ctxPie, {
+            type: 'pie',
+            data: {
+              labels: categoryLabels,
+              datasets: [{
+                data: categoryData,
+                backgroundColor: [
+                  'rgba(255, 99, 132, 0.5)',
+                  'rgba(54, 162, 235, 0.5)',
+                  'rgba(255, 206, 86, 0.5)',
+                  'rgba(75, 192, 192, 0.5)',
+                  'rgba(153, 102, 255, 0.5)',
+                  'rgba(255, 159, 64, 0.5)'
+                ],
+                borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  position: 'right',
+                  labels: {
+                    padding: 20
                   }
                 }
               }
