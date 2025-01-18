@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Meuscompromissos" %></title>
+    <title><%= content_for(:title) || "Meus Compromissos" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
@@ -30,8 +30,7 @@
             <%= link_to root_path do %>
               <h1><b>MEUS COMPROMISSOS</b></h1>
             <% end %>
-            <span id="notification" class="flex items-center mx-4">
-              
+            <span id="notification" class="flex items-center mx-4">            
               <% if @available_hours > 1 %>
                 <%= lucide_icon('check', class: 'text-green-300 mr-2') %>
                 Você tem <%= @formatted_available_hours %>
