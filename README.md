@@ -83,7 +83,6 @@ The "Meus Compromissos" system is a practical tool for managing weekly tasks and
 
 - [ ] Cobrir o sistema de testes! 👁‍🗨
 - [ ] Refatorar código! 👁‍🗨
-- [ ] Criação da página de estatísticas 🔎
 - [ ] Alterar visual em dark/light mode 🌗
 - [ ] Layout responsivo 1️⃣
 - [ ] Criar paginação 🥖
