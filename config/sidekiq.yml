@@ -1,5 +1,5 @@
 :scheduler:
   :schedule:
     commitment_management:
-      :cron: '0 0 * * *'
+      :cron: '0 0,12 * * *'
       :class: CommitmentManagementJob

@@ -19,10 +19,10 @@ class CommitmentManagementJob < ApplicationJob
           active: true
         )
 
-        # TODO: Transferir tarefas pendentes para o novo compromisso
-        # commitment.tasks.where(status: [:pending, :in_progress]).each do |task|
-        #   task.update!(commitment: new_commitment)
-        # end
+        # TODO: Transferir tarefas não concluídas para o novo compromisso
+        commitment.tasks.where(status: [:archived, :in_progress]).each do |task|
+          task.update!(commitment: new_commitment)
+        end
       end
     end
 
