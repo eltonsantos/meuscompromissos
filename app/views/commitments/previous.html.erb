@@ -36,11 +36,11 @@
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="text-sm text-gray-900"><%= number_to_percentage(previous_commitment.progress, precision: @progress_percentage.to_i == @progress_percentage ? 0 : 2, locale: :'pt-BR') %></div>
               </td>
-              <td class="px-6 py-4 whitespace-nowrap">
+              <td class="px-2 py-4 whitespace-normal break-words max-w-xs">
                 <% if previous_commitment.tasks.any? %>
                   <ul class="list-disc ml-5">
                     <% previous_commitment.tasks.each do |task| %>
-                      <li class="mb-2">
+                      <li class="mb-2 bg-slate-200 p-4 list-none">
                         <strong>Título:</strong> <%= task.title %> <br>
                         <strong>Categoria:</strong> <%= task.category.name %> <br>
                         <strong>Horas:</strong> <%= task.formatted_hours %> <br>
