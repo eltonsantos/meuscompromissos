@@ -69,6 +69,14 @@ The "Meus Compromissos" system is a practical tool for managing weekly tasks and
   <img alt="meuscompromissos-layout" src=".github/meuscompromissos-layout.png" width="1120px">
 </p>
 
+<p align="center">
+  <img alt="meuscompromissos-piechart" src=".github/meuscompromissos-piechart.png" width="1120px">
+</p>
+
+<p align="center">
+  <img alt="meuscompromissos-barchart" src=".github/meuscompromissos-barchart.png" width="1120px">
+</p>
+
 ## 🔖 Entity Relationship Diagram (ERD)
 
 * Still in development
