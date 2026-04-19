@@ -83,6 +83,4 @@ test:
 #
 production:
   <<: *default
-  database: meuscompromissos_production
-  username: meuscompromissos
-  password: <%= ENV["MEUSCOMPROMISSOS_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>
