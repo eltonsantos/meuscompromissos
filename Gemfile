@@ -43,7 +43,7 @@ gem "lucide-rails"
 gem "paper_trail"
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
-gem "rails_toastify"
+gem "rails_toastify", "~> 1.2.3"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
