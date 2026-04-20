@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   resources :commitments
   devise_for :users
 
+  resource :push_subscription, only: [:create, :destroy]
+  post "/cron/run", to: "cron#run"
+
   get 'charts', to: 'charts#index'
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

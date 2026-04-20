@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//home/elton/dev/my_projects/meuscompromissos/app/**)",
+      "Read(///wsl.localhost/Ubuntu-20.04/home/elton/dev/my_projects/meuscompromissos/app/**)",
+      "Read(///wsl.localhost/Ubuntu-20.04/home/elton/dev/my_projects/**)",
+      "Read(///wsl.localhost/Ubuntu-20.04/home/elton/dev/my_projects/meuscompromissos/**)",
+      "Read(///wsl.localhost/Ubuntu-20.04/home/elton/dev/my_projects/meuscompromissos/config/initializers/**)",
+      "Bash(xargs grep *)"
+    ]
+  }
+}

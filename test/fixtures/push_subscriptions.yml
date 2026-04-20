@@ -1,0 +1,2 @@
+# Push subscriptions fixtures intentionally vazias.
+# Os testes criam registros explicitamente para evitar acoplamento com fixtures de users.

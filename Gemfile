@@ -44,6 +44,7 @@ gem "paper_trail"
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
 gem "rails_toastify", "~> 1.2.3"
+gem "web-push", "~> 3.0.1"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

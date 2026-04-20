@@ -6,6 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="vapid-public-key" content="<%= ENV['VAPID_PUBLIC_KEY'] %>">
 
     <%= yield :head %>
 
@@ -46,6 +47,18 @@
                 Você não tem horas livres no seu dia
               <% end %>
             </span>
+            <div class="flex items-center mr-4"
+                 data-controller="push-subscription"
+                 data-push-subscription-vapid-key-value="<%= ENV['VAPID_PUBLIC_KEY'] %>">
+              <button type="button"
+                      data-push-subscription-target="button"
+                      data-action="click->push-subscription#toggle"
+                      class="inline-flex items-center px-3 py-1 rounded text-sm bg-yellow-500 text-stone-900 hover:bg-yellow-400 disabled:opacity-50 disabled:cursor-not-allowed">
+                <%= lucide_icon('bell', class: 'w-4 h-4 mr-1') %>
+                Ativar notificacoes
+              </button>
+              <span data-push-subscription-target="status" class="sr-only"></span>
+            </div>
             <div class="relative group">
               <a href="<%= edit_user_registration_path %>" id="avatar-profile" class="flex items-center">
                 <p class="mr-2 text-end">

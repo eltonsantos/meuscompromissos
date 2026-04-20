@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :commitments, dependent: :destroy
   has_many :categories, dependent: :destroy
+  has_many :push_subscriptions, dependent: :destroy
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
