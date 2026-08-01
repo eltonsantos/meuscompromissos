@@ -1,4 +1,4 @@
-<div class="bg-white p-8">
+<div class="bg-white p-4 md:p-8">
   <% if notice.present? %>
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
@@ -6,11 +6,25 @@
   <% content_for :title, "Atividades" %>
 
   <div class="flex justify-between items-center mb-6">
-    <h1 class="font-bold text-4xl text-stone-800">Atividades</h1>
+    <h1 class="font-bold text-2xl text-stone-800 md:text-4xl">Atividades</h1>
   </div>
 
   <div id="activities" class="w-full">
     <% if @activities.any? %>
+      <ul class="space-y-4 md:hidden">
+        <% @activities.each do |activity| %>
+          <li id="<%= dom_id(activity, :card) %>" class="rounded-lg border border-gray-200 p-4">
+            <div class="flex items-baseline justify-between gap-2">
+              <span class="text-sm font-medium"><%= format_event_type(activity.event) %></span>
+              <span class="text-xs text-gray-500"><%= activity.created_at.strftime("%d/%m/%Y - %H:%M") %></span>
+            </div>
+            <p class="mt-1 text-xs uppercase tracking-wider text-gray-500">Tarefa #<%= activity.item_id %></p>
+            <div class="mt-2 text-sm text-gray-900 break-words"><%= format_changes(activity.object_changes, activity.event) %></div>
+          </li>
+        <% end %>
+      </ul>
+
+      <div class="hidden overflow-x-auto md:block">
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-stone-500 text-white">
           <tr>
@@ -39,6 +53,7 @@
           <% end %>
         </tbody>
       </table>
+      </div>
     <% else %>
       <p>Nenhuma atividade registrada</p>
     <% end %> 

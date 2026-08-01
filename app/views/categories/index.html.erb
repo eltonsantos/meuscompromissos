@@ -1,14 +1,15 @@
-<div class="bg-white p-8">
+<div class="bg-white p-4 md:p-8">
   <div class="tab-section rounded-lg min-h-[400px]">
     <% content_for :title, "Categorias" %>
 
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="font-bold text-4xl text-stone-800">Categorias</h1>
-      <%= link_to "Cadastrar categoria", new_category_path, class: "rounded-lg py-3 px-5 bg-stone-700 hover:bg-stone-800 text-white block font-medium", data: { turbo_frame: "modal" } %>
+    <div class="flex flex-col items-start gap-3 mb-6 md:flex-row md:justify-between md:items-center md:gap-0">
+      <h1 class="font-bold text-2xl text-stone-800 md:text-4xl">Categorias</h1>
+      <%= link_to "Cadastrar categoria", new_category_path, class: "rounded-lg py-3 px-5 bg-stone-700 hover:bg-stone-800 text-white block font-medium w-full text-center md:w-auto md:text-left", data: { turbo_frame: "modal" } %>
     </div>
 
     <div id="categories" class="w-full">
       <% if @categories.any? %>
+        <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-stone-500 text-white">
             <tr>
@@ -23,10 +24,10 @@
                   <div class="text-sm text-gray-900"><%= category.name %></div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
-                  <%= link_to edit_category_path(category), class: "ml-2 rounded-lg py-2 px-4 text-blue-600 hover:bg-gray-100 inline-block font-medium cursor-pointer", data: { turbo_frame: "modal" } do %>
+                  <%= link_to edit_category_path(category), class: "ml-2 rounded-lg py-2 px-4 text-blue-600 hover:bg-gray-100 inline-flex items-center justify-center min-h-[44px] min-w-[44px] font-medium cursor-pointer md:inline-block md:min-h-[auto] md:min-w-[auto]", data: { turbo_frame: "modal" } do %>
                     <%= lucide_icon('file-pen-line', class: 'inline-block text-blue-600 cursor-pointer') %>
                   <% end %>
-                  <%= link_to category, method: :delete, class: "ml-2 rounded-lg py-2 px-4 text-blue-600 hover:bg-gray-100 inline-block font-medium cursor-pointer", data: { turbo_method: :delete, turbo_confirm: "Tem certeza?" } do %>
+                  <%= link_to category, method: :delete, class: "ml-2 rounded-lg py-2 px-4 text-blue-600 hover:bg-gray-100 inline-flex items-center justify-center min-h-[44px] min-w-[44px] font-medium cursor-pointer md:inline-block md:min-h-[auto] md:min-w-[auto]", data: { turbo_method: :delete, turbo_confirm: "Tem certeza?" } do %>
                     <%= lucide_icon('circle-x', class: 'inline-block text-red-600 cursor-pointer') %>
                   <% end %>
                 </td>
@@ -34,6 +35,7 @@
             <% end %>
           </tbody>
         </table>
+        </div>
       <% else %>
         <p>Nenhum sintoma registrado</p>
       <% end %>

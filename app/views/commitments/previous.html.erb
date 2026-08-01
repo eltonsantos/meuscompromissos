@@ -1,4 +1,4 @@
-<div class="bg-white p-8">
+<div class="bg-white p-4 md:p-8">
   <% if notice.present? %>
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
@@ -6,11 +6,41 @@
   <% content_for :title, "Compromissos anteriores" %>
 
   <div class="flex justify-between items-center mb-6">
-    <h1 class="font-bold text-4xl text-stone-800">Compromissos anteriores</h1>
+    <h1 class="font-bold text-2xl text-stone-800 md:text-4xl">Compromissos anteriores</h1>
   </div>
 
   <div id="previous_commitments" class="w-full">
     <% if @previous_commitments.any? %>
+      <ul class="space-y-4 md:hidden">
+        <% @previous_commitments.each_with_index do |previous_commitment, index| %>
+          <li id="<%= dom_id(previous_commitment, :card) %>" class="rounded-lg border border-gray-200 p-4">
+            <div class="flex items-baseline justify-between gap-2">
+              <span class="text-xs font-semibold uppercase text-gray-500">#<%= index + 1 %></span>
+              <span class="text-xs text-gray-500"><%= previous_commitment.updated_at.strftime('%d/%m/%Y') %></span>
+            </div>
+            <p class="mt-1 font-semibold text-gray-900"><%= previous_commitment.description %></p>
+            <p class="mt-1 text-sm text-gray-700">
+              Progresso: <%= number_to_percentage(previous_commitment.progress, precision: @progress_percentage.to_i == @progress_percentage ? 0 : 2, locale: :'pt-BR') %>
+            </p>
+            <% if previous_commitment.tasks.any? %>
+              <ul class="mt-3 space-y-2">
+                <% previous_commitment.tasks.each do |task| %>
+                  <li class="bg-slate-200 p-3 text-sm">
+                    <strong>Título:</strong> <%= task.title %> <br>
+                    <strong>Categoria:</strong> <%= task.category.name %> <br>
+                    <strong>Horas:</strong> <%= task.formatted_hours %> <br>
+                    <strong>Status:</strong> <%= task.formatted_status %>
+                  </li>
+                <% end %>
+              </ul>
+            <% else %>
+              <p class="mt-3 text-sm text-gray-500">Nenhuma tarefa associada</p>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+
+      <div class="hidden overflow-x-auto md:block">
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-stone-500 text-white">
           <tr>
@@ -56,6 +86,7 @@
           <% end %>
         </tbody>
       </table>
+      </div>
     <% else %>
       <p>Nenhum compromisso anterior registrado</p>
     <% end %> 
