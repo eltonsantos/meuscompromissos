@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["button", "status"]
+  static targets = ["button", "status", "label"]
   static values = { vapidKey: String }
 
   connect() {
@@ -125,14 +125,23 @@ export default class extends Controller {
     if (this.hasButtonTarget) {
       this.buttonTarget.dataset.state = state
       if (state === "active") {
-        this.buttonTarget.textContent = "Desativar notificacoes"
+        this.setLabel("Desativar notificacoes")
       } else if (state === "unsupported" || state === "denied") {
-        this.buttonTarget.textContent = "Notificacoes indisponiveis"
+        this.setLabel("Notificacoes indisponiveis")
         this.buttonTarget.disabled = true
       } else {
-        this.buttonTarget.textContent = "Ativar notificacoes"
+        this.setLabel("Ativar notificacoes")
       }
     }
+  }
+
+  setLabel(text) {
+    if (this.hasLabelTarget) {
+      this.labelTarget.textContent = text
+    } else if (this.hasButtonTarget) {
+      this.buttonTarget.textContent = text
+    }
+    if (this.hasButtonTarget) this.buttonTarget.setAttribute("aria-label", text)
   }
 
   isSupported() {

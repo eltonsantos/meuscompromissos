@@ -2,8 +2,10 @@
 <html>
   <head>
     <title><%= content_for(:title) || "Meus Compromissos" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#292524">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="vapid-public-key" content="<%= ENV['VAPID_PUBLIC_KEY'] %>">
@@ -28,107 +30,120 @@
   </head>
   <body class="bg-slate-200">
     <% if user_signed_in? %>
-      <header class="bg-stone-800 text-white h-18">
-        <div class="container mx-auto p-4 flex justify-between items-center" style="max-width: 1224px;">
-          <section id="top" class="w-full flex justify-between items-center">
+      <header class="bg-stone-800 text-white">
+        <div class="container mx-auto max-w-[1224px] p-4 pt-[calc(1rem+env(safe-area-inset-top))] flex justify-between items-center">
+          <section id="top" class="w-full flex flex-wrap justify-between items-center gap-y-3 md:flex-nowrap">
             <h2 class="sr-only">Homepage</h2>
-            <%= link_to root_path do %>
-              <h1><b>MEUS COMPROMISSOS</b></h1>
+            <%= link_to root_path, class: "shrink-0" do %>
+              <h1 class="text-sm leading-tight md:text-base"><b>MEUS COMPROMISSOS</b></h1>
             <% end %>
-            <span id="notification" class="flex items-center mx-4">            
+            <span id="notification" class="order-last w-full flex items-center justify-center text-center text-sm md:order-none md:w-auto md:justify-start md:text-left md:text-base md:mx-4">
               <% if @available_hours > 1 %>
-                <%= lucide_icon('check', class: 'text-green-300 mr-2') %>
+                <%= lucide_icon('check', class: 'text-green-300 mr-2 shrink-0') %>
                 Você tem <%= @formatted_available_hours %>
               <% elsif @available_hours == 1 %>
-                <%= lucide_icon('triangle-alert', class: 'text-yellow-300 mr-2') %>
+                <%= lucide_icon('triangle-alert', class: 'text-yellow-300 mr-2 shrink-0') %>
                 Você tem <%= @formatted_available_hours %>
               <% else %>
-                <%= lucide_icon('x', class: 'text-red-300 mr-2') %>
+                <%= lucide_icon('x', class: 'text-red-300 mr-2 shrink-0') %>
                 Você não tem horas livres no seu dia
               <% end %>
             </span>
-            <div class="flex items-center mr-4"
-                 data-controller="push-subscription"
-                 data-push-subscription-vapid-key-value="<%= ENV['VAPID_PUBLIC_KEY'] %>">
-              <button type="button"
-                      data-push-subscription-target="button"
-                      data-action="click->push-subscription#toggle"
-                      class="inline-flex items-center px-3 py-1 rounded text-sm bg-yellow-500 text-stone-900 hover:bg-yellow-400 disabled:opacity-50 disabled:cursor-not-allowed">
-                <%= lucide_icon('bell', class: 'w-4 h-4 mr-1') %>
-                Ativar notificacoes
-              </button>
-              <span data-push-subscription-target="status" class="sr-only"></span>
-            </div>
-            <div class="relative group">
-              <a href="<%= edit_user_registration_path %>" id="avatar-profile" class="flex items-center">
-                <p class="mr-2 text-end">
-                  <b><%= current_user.name %></b>
-                  <br />
-                  <span class="text-gray-30">Ver perfil</span>
-                </p>
-                <% if current_user.avatar.present? %>
-                  <img src="<%= current_user.avatar %>" class="h-12 w-12 rounded-full border-yellow-500 border-2" />
-                <% else %>
-                  <%= lucide_icon('user', class: 'h-12 w-12 rounded-full border-yellow-500 border-2') %>
-                <% end %>
-              </a>
+            <div class="flex items-center gap-2 md:contents">
+              <div class="flex items-center md:mr-4"
+                   data-controller="push-subscription"
+                   data-push-subscription-vapid-key-value="<%= ENV['VAPID_PUBLIC_KEY'] %>">
+                <button type="button"
+                        data-push-subscription-target="button"
+                        data-action="click->push-subscription#toggle"
+                        aria-label="Ativar ou desativar notificações"
+                        class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] px-3 py-1 rounded text-sm bg-yellow-500 text-stone-900 hover:bg-yellow-400 disabled:opacity-50 disabled:cursor-not-allowed md:min-h-[auto] md:min-w-[auto]">
+                  <%= lucide_icon('bell', class: 'w-4 h-4 shrink-0 md:mr-1') %>
+                  <span data-push-subscription-target="label" class="hidden md:inline">Ativar notificacoes</span>
+                </button>
+                <span data-push-subscription-target="status" class="sr-only"></span>
+              </div>
+              <div class="relative group" data-controller="dropdown">
+                <div class="flex items-center">
+                  <a href="<%= edit_user_registration_path %>" id="avatar-profile" class="flex items-center">
+                    <p class="mr-2 text-end hidden sm:block">
+                      <b><%= current_user.name %></b>
+                      <br />
+                      <span>Ver perfil</span>
+                    </p>
+                    <% if current_user.avatar.present? %>
+                      <img src="<%= current_user.avatar %>" class="h-10 w-10 rounded-full border-yellow-500 border-2 md:h-12 md:w-12" />
+                    <% else %>
+                      <%= lucide_icon('user', class: 'h-10 w-10 rounded-full border-yellow-500 border-2 md:h-12 md:w-12') %>
+                    <% end %>
+                  </a>
+                  <button type="button"
+                          data-dropdown-target="button"
+                          data-action="dropdown#toggle"
+                          aria-expanded="false"
+                          aria-label="Abrir menu"
+                          class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded md:hidden touch:!inline-flex">
+                    <%= lucide_icon('chevron-down', class: 'h-5 w-5') %>
+                  </button>
+                </div>
 
-              <div class="absolute right-0 w-48 bg-stone-800 rounded-lg border border-yellow-500 shadow-lg hidden group-hover:block z-50">
-                <ul class="py-1">
-                  <li>
-                    <%= link_to "Compromissos anteriores", previous_commitments_path, class: "block px-4 py-2 text-white  hover:text-gray-300" %>
-                  </li>
-                  <li>
-                    <%= link_to "Listar categorias", categories_path, class: "block px-4 py-2 text-white  hover:text-gray-300" %>
-                  </li>
-                  <li>
-                    <%= link_to "Histórico de atividades", activities_tasks_path, class: "block px-4 py-2 text-white  hover:text-gray-300" %>
-                  </li>
-                  <li class="border-t border-gray-200"></li>
-                  <li>
-                    <%= button_to "Sair", destroy_user_session_path, method: :delete, class: "block px-4 py-2 text-yellow-300 hover:text-yellow-600" %>
-                  </li>
-                </ul>
+                <div data-dropdown-target="menu" class="absolute right-0 w-56 bg-stone-800 rounded-lg border border-yellow-500 shadow-lg hidden md:group-hover:block z-50 md:w-48">
+                  <ul class="py-1">
+                    <li>
+                      <%= link_to "Compromissos anteriores", previous_commitments_path, class: "block px-4 py-3 text-white hover:text-gray-300 md:py-2" %>
+                    </li>
+                    <li>
+                      <%= link_to "Listar categorias", categories_path, class: "block px-4 py-3 text-white hover:text-gray-300 md:py-2" %>
+                    </li>
+                    <li>
+                      <%= link_to "Histórico de atividades", activities_tasks_path, class: "block px-4 py-3 text-white hover:text-gray-300 md:py-2" %>
+                    </li>
+                    <li class="border-t border-gray-200"></li>
+                    <li>
+                      <%= button_to "Sair", destroy_user_session_path, method: :delete, class: "block px-4 py-3 text-yellow-300 hover:text-yellow-600 md:py-2" %>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </section>
         </div>
       </header>
 
-      <section id="summary" class="bg-stone-800 text-white h-25">
-        <div class="container mx-auto p-4 flex justify-between border-t border-stone-700" style="max-width: 1224px;">
+      <section id="summary" class="bg-stone-800 text-white">
+        <div class="container mx-auto max-w-[1224px] p-4 flex flex-col gap-4 justify-between border-t border-stone-700 md:flex-row md:gap-0">
           <h2 class="sr-only">Sumário</h2>
-          <div class="grid grid-cols-5">
-            <div class="bg-gray p-4 text-yellow-400">
+          <div class="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-5 md:gap-0">
+            <div class="p-2 text-sm text-yellow-400 md:p-4 md:text-base">
               <strong><%= @total_tasks %></strong>
               Tarefas ao total
             </div>
-            <div class="bg-gray p-4 text-blue-400">
+            <div class="p-2 text-sm text-blue-400 md:p-4 md:text-base">
               <strong><%= @in_progress %></strong>
               Em andamento
             </div>
-            <div class="bg-gray p-4 text-green-400">
+            <div class="p-2 text-sm text-green-400 md:p-4 md:text-base">
               <strong><%= @completed %></strong>
               Concluídas
             </div>
-            <div class="bg-gray p-4 text-gray-400">
+            <div class="p-2 text-sm text-gray-400 md:p-4 md:text-base">
               <strong><%= @archived %></strong>
               Arquivadas
             </div>
-            <div class="bg-gray p-4 text-white">
+            <div class="p-2 text-sm text-white md:p-4 md:text-base">
               <strong><%= number_to_percentage(@progress_percentage, precision: @progress_percentage.to_i == @progress_percentage ? 0 : 2, locale: :'pt-BR') %></strong>
               Progresso
             </div>
           </div>
           <% if current_user.has_active_commitments? %>
-            <%= link_to new_task_path, class: "button orange mt-3 inline-flex items-center px-4 py-2 rounded font-bold " + (@available_hours > 0 ? "bg-green-500 text-white hover:bg-green-600" : "cursor-not-allowed pointer-events-none bg-gray-400 text-white"), data: { turbo: (@available_hours > 0).to_s } do %>
+            <%= link_to new_task_path, class: "button orange w-full justify-center inline-flex items-center px-4 py-2 rounded font-bold md:w-auto md:mt-3 " + (@available_hours > 0 ? "bg-green-500 text-white hover:bg-green-600" : "cursor-not-allowed pointer-events-none bg-gray-400 text-white"), data: { turbo: (@available_hours > 0).to_s } do %>
               <span class="mr-2">
                 <%= lucide_icon('square-plus', class: 'text-white mr-2') %>
               </span>
               Adicionar nova tarefa
             <% end %>
           <% else %>
-            <%= link_to new_commitment_path, class: "button orange mt-3 inline-flex items-center bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 font-bold" do %>
+            <%= link_to new_commitment_path, class: "button orange w-full justify-center inline-flex items-center bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 font-bold md:w-auto md:mt-3" do %>
               <span class="mr-2">
                 <%= lucide_icon('square-plus', class: 'text-white mr-2') %>
               </span>
@@ -138,7 +153,7 @@
         </div>
       </section>
 
-      <main class="mx-auto p-4 items-center" style="max-width: 1224px;">
+      <main class="mx-auto max-w-[1224px] p-4 pb-[calc(1rem+env(safe-area-inset-bottom))] items-center">
         <%= yield %>
         <%= rails_toastify_container %>
         <%= rails_toastify_script %>
