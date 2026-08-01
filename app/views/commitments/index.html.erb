@@ -5,9 +5,9 @@
 
   <% content_for :title, "Commitments" %>
 
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Commitments</h1>
-    <%= link_to "New commitment", new_commitment_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+  <div class="flex flex-col items-start gap-3 md:flex-row md:justify-between md:items-center md:gap-0">
+    <h1 class="font-bold text-2xl md:text-4xl">Commitments</h1>
+    <%= link_to "New commitment", new_commitment_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium w-full text-center md:w-auto md:text-left" %>
   </div>
 
   <div id="commitments" class="min-w-full">

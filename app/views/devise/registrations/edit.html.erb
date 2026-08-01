@@ -1,4 +1,4 @@
-<div class="bg-white p-8">
+<div class="bg-white p-4 md:p-8">
   <div class="tab-section rounded-lg min-h-[400px]">
     <div class="flex flex-wrap gap-1 border-b border-stone-300">
       <button class="inline-block p-4 text-stone-600 font-semibold rounded-t-lg active"
@@ -8,25 +8,25 @@
     </div>
     <div class="mt-4">
       <div id="tab1" class="tab-content text-gray-700">
-        <div class="flex">
-          <aside class="card bg-white border border-gray-300 rounded-lg text-center justify-center flex flex-col items-center w-1/3">
+        <div class="flex flex-col md:flex-row">
+          <aside class="card bg-white border border-gray-300 rounded-lg text-center justify-center flex flex-col items-center w-full p-4 md:w-1/3 md:p-0">
             <% if resource.avatar? %>
-              <img src="<%= resource.avatar %>" alt="Avatar" class="rounded-full border-yellow-500 border-4 border-secondary w-72 h-72 mb-4" />
+              <img src="<%= resource.avatar %>" alt="Avatar" class="rounded-full border-yellow-500 border-4 border-secondary w-40 h-40 mb-4 md:w-72 md:h-72" />
             <% else %>
-              <%= lucide_icon('user-round', class: "rounded-full border-yellow-500 border-4 border-secondary w-72 h-72 mb-4") %>
+              <%= lucide_icon('user-round', class: "rounded-full border-yellow-500 border-4 border-secondary w-40 h-40 mb-4 md:w-72 md:h-72") %>
             <% end %>
             <h2 class="text-2xl font-semibold mb-4"><%= resource.name %></h2>
             <p class="text-lg">
               Quantidade de horas que trabalha na semana: <br />
-              <strong class="text-4xl"><%= resource.formatted_hours_per_week %></strong>
+              <strong class="text-3xl md:text-4xl"><%= resource.formatted_hours_per_week %></strong>
             </p>
             <br />
             <p class="text-lg">
               Tempo restante do compromisso: <br />
-              <strong class="text-4xl"><%= resource.commitments.last.time_remaining if resource.commitments.any? %></strong>
+              <strong class="text-3xl md:text-4xl"><%= resource.commitments.last.time_remaining if resource.commitments.any? %></strong>
             </p>
           </aside>  
-          <main class="flex-1 p-4">
+          <main class="flex-1 py-4 md:p-4">
             <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'space-y-4' }) do |f| %>
               <%= render "devise/shared/error_messages", resource: resource %>
 
@@ -66,13 +66,13 @@
               </div>
 
               <div class="actions mt-4">
-                <%= f.submit "Atualizar", class: 'bg-blue-600 text-white font-semibold py-2 px-4 rounded' %>
+                <%= f.submit "Atualizar", class: 'bg-blue-600 text-white font-semibold py-2 px-4 rounded block w-full sm:inline-block sm:w-auto' %>
               </div>
             <% end %>
 
             <h3 class="text-lg font-semibold mt-6 border-t-4 border-red-400">Zona de perigo</h3>
             <div>
-              <%= button_to registration_path(resource_name), data: { confirm: "Você tem certeza? Essa ação não poderá ser desfeita e todos os dados serão perdidos!" }, method: :delete, class: 'button orange mt-3 inline-flex items-center bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 font-bold' do %>
+              <%= button_to registration_path(resource_name), data: { turbo_confirm: "Você tem certeza? Essa ação não poderá ser desfeita e todos os dados serão perdidos!" }, method: :delete, class: 'button orange mt-3 inline-flex w-full justify-center items-center bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 font-bold sm:w-auto' do %>
                 <span class="mr-2">
                   <%= lucide_icon('x', class: 'text-white') %>
                 </span>
@@ -83,7 +83,7 @@
         </div>
       </div>
       <div id="tab2" class="hidden tab-content text-gray-700">
-        <h4 class="font-bold mt-9 mb-4 text-2xl">Estatística</h4>
+        <h4 class="font-bold mt-9 mb-4 text-xl md:text-2xl">Estatística</h4>
         <%= render partial: 'charts/index', locals: { tarefa: Task.first } %>
       </div>
     </div>
@@ -175,7 +175,7 @@
               maintainAspectRatio: false,
               plugins: {
                 legend: {
-                  position: 'right',
+                  position: window.matchMedia('(min-width: 768px)').matches ? 'right' : 'bottom',
                   labels: {
                     padding: 20
                   }
