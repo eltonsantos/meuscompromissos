@@ -1,25 +1,31 @@
-<h2>Change your password</h2>
+<div class="min-h-[100dvh] flex items-center justify-center bg-gray-100 p-4">
+  <div class="max-w-md w-full bg-white p-6 rounded-lg shadow-md sm:p-8">
+    <h1 class="text-2xl font-bold text-center mb-6 text-slate-800 sm:text-3xl">Alterar senha</h1>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <%= f.hidden_field :reset_password_token %>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+      <div class="space-y-4">
+        <div>
+          <%= f.label :password, "Nova senha", class: "block text-sm font-medium text-gray-700" %>
+          <% if @minimum_password_length %>
+            <span class="text-xs text-gray-500">(mínimo de <%= @minimum_password_length %> caracteres)</span>
+          <% end %>
+          <%= f.password_field :password, required: true, autofocus: true, autocomplete: "new-password", class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-stone-500 focus:border-stone-500 sm:text-sm" %>
+        </div>
+
+        <div>
+          <%= f.label :password_confirmation, "Confirme a nova senha", class: "block text-sm font-medium text-gray-700" %>
+          <%= f.password_field :password_confirmation, required: true, autocomplete: "new-password", class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-stone-500 focus:border-stone-500 sm:text-sm" %>
+        </div>
+      </div>
+
+      <div class="mt-6">
+        <%= f.submit "Alterar minha senha", class: "w-full bg-stone-600 text-white py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium hover:bg-stone-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-stone-500 cursor-pointer" %>
+      </div>
     <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= render "devise/shared/links" %>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

@@ -1,29 +1,45 @@
-<h2>Sign up</h2>
+<div class="min-h-[100dvh] flex items-center justify-center bg-gray-100 p-4">
+  <div class="max-w-md w-full bg-white p-6 rounded-lg shadow-md sm:p-8">
+    <h1 class="text-2xl font-bold text-center mb-6 text-slate-800 sm:text-3xl">Criar conta</h1>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <div class="space-y-4">
+        <div>
+          <%= f.label :name, "Nome", class: "block text-sm font-medium text-gray-700" %>
+          <%= f.text_field :name, required: true, autofocus: true, autocomplete: "name", class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-stone-500 focus:border-stone-500 sm:text-sm" %>
+        </div>
+
+        <div>
+          <%= f.label :email, "E-mail", class: "block text-sm font-medium text-gray-700" %>
+          <%= f.email_field :email, required: true, autocomplete: "email", class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-stone-500 focus:border-stone-500 sm:text-sm" %>
+        </div>
+
+        <div>
+          <%= f.label :hours_per_week, "Horas por semana", class: "block text-sm font-medium text-gray-700" %>
+          <%= f.number_field :hours_per_week, step: 0.25, min: 0.25, required: true, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-stone-500 focus:border-stone-500 sm:text-sm" %>
+        </div>
+
+        <div>
+          <%= f.label :password, "Senha", class: "block text-sm font-medium text-gray-700" %>
+          <% if @minimum_password_length %>
+            <span class="text-xs text-gray-500">(mínimo de <%= @minimum_password_length %> caracteres)</span>
+          <% end %>
+          <%= f.password_field :password, required: true, autocomplete: "new-password", class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-stone-500 focus:border-stone-500 sm:text-sm" %>
+        </div>
+
+        <div>
+          <%= f.label :password_confirmation, "Confirmação de senha", class: "block text-sm font-medium text-gray-700" %>
+          <%= f.password_field :password_confirmation, required: true, autocomplete: "new-password", class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-stone-500 focus:border-stone-500 sm:text-sm" %>
+        </div>
+      </div>
+
+      <div class="mt-6">
+        <%= f.submit "Criar conta", class: "w-full bg-stone-600 text-white py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium hover:bg-stone-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-stone-500 cursor-pointer" %>
+      </div>
+    <% end %>
+
+    <%= render "devise/shared/links" %>
   </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
