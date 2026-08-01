@@ -4,24 +4,24 @@
     <% if @tasks.any? %>
       <div class="cards">
         <% @tasks.each_with_index do |task, index| %>
-          <div class="card group relative grid grid-cols-6 gap-4 mb-2 p-8 transition-all border rounded items-center <%= task.status == "in_progress" ? "bg-white duration-200 hover:bg-gradient-to-r from-orange-100 to-white border-slate-300" : "" %> <%= task.status == "archived" ? "bg-slate-300 text-slate-400 border-slate-300" : "" %> <%= task.status == "completed" ? "bg-green-300 text-green-600 border-green-400" : "" %>" data-id="<%= task.id %>">
+          <div class="card group relative flex flex-col gap-3 mb-2 p-4 transition-all border rounded md:grid md:grid-cols-6 md:gap-4 md:p-8 md:items-center <%= task.status == "in_progress" ? "bg-white duration-200 hover:bg-gradient-to-r from-orange-100 to-white border-slate-300" : "" %> <%= task.status == "archived" ? "bg-slate-300 text-slate-400 border-slate-300" : "" %> <%= task.status == "completed" ? "bg-green-300 text-green-600 border-green-400" : "" %>" data-id="<%= task.id %>">
             <div class="col-span-2 text-start">
-              <%= link_to task_path(task.id), data: { turbo_frame: "modal" } do %>  
+              <%= link_to task_path(task.id), data: { turbo_frame: "modal" } do %>
                 <div class="flex gap-4 items-center">
                   <span><%= index + 1 %></span>
-                  <div class="text-xl font-semibold"><%= task.title %></div>
+                  <div class="text-lg font-semibold md:text-xl"><%= task.title %></div>
                 </div>
               <% end %>
             </div>
-            <div class="col-span-1">
+            <div class="col-span-1 flex items-baseline gap-2 md:block">
               <span class="block text-xs font-semibold uppercase">Horas Alocadas</span>
               <p class="font-semibold"><%= task.formatted_hours %></p>
             </div>
-            <div class="col-span-1">
+            <div class="col-span-1 flex items-baseline gap-2 md:block">
               <span class="block text-xs font-semibold uppercase">Categoria</span>
               <p class="font-semibold"><%= task.category.name %></p>
             </div>
-            <div class="col-span-1 flex items-center justify-center font-semibold">      
+            <div class="col-span-1 flex items-center font-semibold md:justify-center">
               <% case task.status %>
               <% when "archived" %>
                 <div class="text-slate-400">
@@ -37,23 +37,23 @@
                 </div>
               <% end %>
             </div>
-            <div class="col-span-1 justify-end items-center gap-3 hidden group-hover:flex">
+            <div class="col-span-1 flex flex-wrap items-center gap-3 border-t border-black/10 pt-3 md:flex-nowrap md:border-0 md:pt-0 md:justify-end md:hidden md:group-hover:flex touch:!flex">
               <p class="sr-only">Ações</p>
               <% if task.status == 'archived' %>
-                <%= button_to lucide_icon('archive-restore', class: 'text-slate-400 hover:text-slate-500 justify-center items-center'), unarchive_task_path(task), method: :patch, title: 'Desarquivar Tarefa' %>
+                <%= button_to lucide_icon('archive-restore', class: 'text-slate-400 hover:text-slate-500 justify-center items-center'), unarchive_task_path(task), method: :patch, title: 'Desarquivar Tarefa', class: "inline-flex items-center justify-center min-h-[44px] min-w-[44px] md:inline-block md:min-h-[auto] md:min-w-[auto]" %>
               <% elsif task.status == 'completed' %>
               <% else %>
-                <%= button_to lucide_icon('check-check', class: 'text-green-500 hover:text-green-600 items-center justify-center '), mark_completed_task_path(task.id), method: :patch, title: 'Marcar como concluída', class: "mt-2" %>
-                <%= button_to lucide_icon('archive', class: 'text-gray-500 hover:text-gray-600 items-center justify-center '), archive_task_path(task), method: :patch, title: 'Arquivar Tarefa', class: "mt-2" %>
-                <%= link_to lucide_icon('edit', class: 'text-blue-500 hover:text-blue-600 items-center justify-center '), edit_task_path(task.id), title: 'Editar Tarefa' %>
-                <%= button_to lucide_icon('trash', class: 'text-red-500 hover:text-red-600 items-center justify-center '), task_path(task.id), method: :delete, data: { confirm: 'Você tem certeza que deseja excluir esta tarefa?' }, title: 'Remover Tarefa' %>
+                <%= button_to lucide_icon('check-check', class: 'text-green-500 hover:text-green-600 items-center justify-center '), mark_completed_task_path(task.id), method: :patch, title: 'Marcar como concluída', class: "mt-2 inline-flex items-center justify-center min-h-[44px] min-w-[44px] md:inline-block md:min-h-[auto] md:min-w-[auto]" %>
+                <%= button_to lucide_icon('archive', class: 'text-gray-500 hover:text-gray-600 items-center justify-center '), archive_task_path(task), method: :patch, title: 'Arquivar Tarefa', class: "mt-2 inline-flex items-center justify-center min-h-[44px] min-w-[44px] md:inline-block md:min-h-[auto] md:min-w-[auto]" %>
+                <%= link_to lucide_icon('edit', class: 'text-blue-500 hover:text-blue-600 items-center justify-center '), edit_task_path(task.id), title: 'Editar Tarefa', class: "inline-flex items-center justify-center min-h-[44px] min-w-[44px] md:inline md:min-h-[auto] md:min-w-[auto]" %>
+                <%= button_to lucide_icon('trash', class: 'text-red-500 hover:text-red-600 items-center justify-center '), task_path(task.id), method: :delete, data: { turbo_confirm: 'Você tem certeza que deseja excluir esta tarefa?' }, title: 'Remover Tarefa', class: "inline-flex items-center justify-center min-h-[44px] min-w-[44px] md:inline-block md:min-h-[auto] md:min-w-[auto]" %>
               <% end %>
             </div>
           </div>
         <% end %>
       </div>
     <% else %>
-      <h1 class="font-bold text-center items-center text-4xl p-8">
+      <h1 class="font-bold text-center items-center text-2xl p-8 md:text-4xl">
         Não há dados cadastrados.
       </h1>
     <% end %>
