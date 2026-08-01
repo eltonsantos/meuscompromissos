@@ -80,4 +80,10 @@ Rails.application.configure do
   # config.generators.apply_rubocop_autocorrect_after_generate!
 
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
+
+  # Acesso pelo celular: IP da rede local e tuneis HTTPS (ngrok/cloudflare).
+  config.hosts << /\A\d+\.\d+\.\d+\.\d+\z/
+  config.hosts << /\A.*\.ngrok-free\.app\z/
+  config.hosts << /\A.*\.ngrok\.io\z/
+  config.hosts << /\A.*\.trycloudflare\.com\z/
 end
